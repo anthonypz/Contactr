@@ -4,6 +4,7 @@ const companyController = require("../controllers/companies");
 const { ensureAuth } = require("../middleware/auth");
 
 router.get("/", ensureAuth, companyController.getCompanies);
+router.get("/companies", companyController.getCompanies);
 
 router.post("/createCompany", companyController.createCompany);
 router.put("/editCompany", companyController.editCompany);
