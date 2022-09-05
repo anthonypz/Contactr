@@ -44,7 +44,7 @@ module.exports = {
         },
         comments: req.body.comments,
       });
-      console.log("Sendfeedback has been added!");
+      console.log("Demo Data has been added!");
       res.redirect("/demo");
     } catch (err) {
       console.log(err);
