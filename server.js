@@ -11,6 +11,7 @@ const mainRoutes = require("./routes/main");
 const todoRoutes = require("./routes/todos");
 const companyRoutes = require("./routes/companies");
 const sendfeedbackRoutes = require("./routes/sendfeedback");
+const demoRoutes = require("./routes/demo");
 
 require("dotenv").config({ path: "./config/.env" });
 
@@ -44,6 +45,7 @@ app.use("/", mainRoutes);
 app.use("/todos", todoRoutes);
 app.use("/companies", companyRoutes);
 app.use("/sendfeedback", sendfeedbackRoutes);
+app.use("/demo", demoRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(
