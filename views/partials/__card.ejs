@@ -1,0 +1,28 @@
+<!-- list of companies in card format -->
+<div class="row">
+    <div class="col-12">
+        <ul class="list-group">
+            <% companies.forEach(company=> { %>
+                <li class="list-group-item">
+                    <div class="card">
+                        <div class="card-body" data-id='<%=company._id%>'>
+                            <h5 class="card-title">Company Name: <%= company.companyName %>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Point of Contact Name: <%=
+                                    company.pointOfContact.name %>
+                            </h6>
+                            <p class="card-text">Point of Contact Email: <%= company.pointOfContact.email %>
+                            </p>
+                            <a href="#<%= company._id %>" class="card-link" data-toggle="collapse">View</a>
+                            <div id="#<%= company._id %>" class="collapse">
+                                Howdy
+                            </div>
+                            <a href="/companies/edit/<%= company._id %>" class="card-link">Edit</a>
+                            <button class='del-company btn btn-danger'>Delete</button>
+                        </div>
+                    </div>
+                </li>
+                <% }) %>
+        </ul>
+    </div>
+</div>

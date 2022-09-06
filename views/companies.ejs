@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <%- include('partials/head') %>
+  <%- include('partials/__head') %>
 
 </head>
 
 <!-- Header / Navbar -->
 <header class="navbar-space">
-  <%- include('partials/header') %>
+  <%- include('partials/__header') %>
 </header>
 
 <body class="">
@@ -44,71 +44,21 @@
         tabindex="0">
         <!-- Accordion View Content Goes Here -->
 
-
-        <div class="accordion">
-          <% companies.forEach(company => { %>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="<%= company.companyName %>head">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                data-bs-target="#<%= company.companyName %>" aria-expanded="false"
-                aria-controls="<%= company.companyName %>">
-                <div data-id='<%=company._id%>'>
-                  <h5 class="card-title">Company Name: <%= company.companyName %></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Point of Contact Name: <%= company.pointOfContact.name %>
-                  </h6>
-                  <p class="card-text">Point of Contact Email: <%= company.pointOfContact.email %></p>
-                </div>
-              </button>
-            </h2>
-            <a href="/companies/edit/<%= company._id %>" class="card-link">Edit</a>
-            <button class='del-company btn btn-danger'>Delete</button>
-            <div id="<%= company.companyName %>" class="accordion-collapse collapse" aria-labelledby="headingOne">
-              <div class="accordion-body">
-                Company Info Here
-              </div>
-            </div>
-          </div>
-          <% }) %>
-
-        </div>
-
+        <%- include('partials/__accordion') %>
 
       </div>
       <div class="tab-pane fade" id="card-tab-pane" role="tabpanel" aria-labelledby="card-tab" tabindex="0">
         <!-- Card View Content Goes Here -->
 
-
-        <!-- list of companies in card format -->
-        <div class="row">
-          <div class="col-12">
-            <ul class="list-group">
-              <% companies.forEach(company => { %>
-              <li class="list-group-item">
-                <div class="card">
-                  <div class="card-body" data-id='<%=company._id%>'>
-                    <h5 class="card-title">Company Name: <%= company.companyName %></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Point of Contact Name: <%= company.pointOfContact.name %>
-                    </h6>
-                    <p class="card-text">Point of Contact Email: <%= company.pointOfContact.email %></p>
-                    <a href="#<%= company._id %>" class="card-link" data-toggle="collapse">View</a>
-                    <div id="#<%= company._id %>" class="collapse">
-                      Howdy
-                    </div>
-                    <a href="/companies/edit/<%= company._id %>" class="card-link">Edit</a>
-                    <button class='del-company btn btn-danger'>Delete</button>
-                  </div>
-                </div>
-              </li>
-              <% }) %>
-            </ul>
-          </div>
-        </div>
+        <%- include('partials/__card') %>
 
       </div>
+
       <div class="tab-pane fade" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab" tabindex="0">
         <!-- Table View Content Goes Here -->
 
         <!-- empty so far -->
+        <!-- <%- include('partials/__table') %> -->
 
       </div>
     </div>
