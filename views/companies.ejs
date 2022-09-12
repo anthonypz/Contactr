@@ -352,24 +352,28 @@
                           </tr>
                         </tbody>
                       </table>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Follow Up Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <%=
-                              company.application.followUpDate?.toLocaleDateString("en-US")
-                              %>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                      <div class="table-responsive">
+                        <table
+                          class="table table-sm table-striped table-borderless"
+                        >
+                          <thead>
+                            <tr>
+                              <th scope="col">Follow Up Date</th>
+                              <th scope="col">Comments</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <%=
+                                company.application.followUpDate?.toLocaleDateString("en-US")
+                                %>
+                              </td>
+                              <td><%= company.comments %></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                     <!-- End of Tables -->
                   </div>
