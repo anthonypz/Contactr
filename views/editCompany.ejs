@@ -80,14 +80,17 @@
               <div class="row m-2">
                 <div class="col col-md-12">
                   <label for="companyName"
-                    >Company: <span style="color: red">*</span></label
-                  >
+                    >Company<span style="color: red">*</span>:
+                  </label>
+                  <span class="edit-label text-muted">
+                    <%= company.companyName %>
+                  </span>
                 </div>
                 <div class="col col-md-12">
                   <input
                     class="w-100 form-control"
                     type="text"
-                    placeholder="<%= company.companyName %>"
+                    placeholder="Company Name"
                     id="companyName"
                     name="companyName"
                     required
@@ -98,9 +101,9 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="dateAdded"
-                    >Date
-                    Added:<%=company.dateAdded?.toLocaleDateString("en-US")%></label
+                  <label for="dateAdded">Date Added: </label>
+                  <span class="edit-label text-muted"
+                    ><%=company.dateAdded?.toLocaleDateString("en-US")%></span
                   >
                 </div>
                 <div class="col col-md-12">
@@ -111,20 +114,20 @@
                     id="dateAdded"
                     name="dateAdded"
                   />
-                  <button class="btn btn-lg btn-primary m-2" type="button" onclick=<%= (e)=> console.log(e.target) %>> Console Log</button>
                 </div>
               </div>
             </div>
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="url">Company Website</label>
+                  <label for="url">Company Website: </label>
+                  <span class="edit-label text-muted"><%= company.url %></span>
                 </div>
                 <div class="col col-md-12">
                   <input
                     class="w-100 form-control"
                     type="text"
-                    placeholder="<%= company.url %>"
+                    placeholder="URL"
                     id="url"
                     name="url"
                   />
@@ -134,14 +137,19 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="roleURL">Role/Position:</label>
+                  <label for="roleURL"
+                    >Role/Position:
+                    <span class="edit-label text-muted"
+                      ><%= company.role %></span
+                    ></label
+                  >
                 </div>
                 <div class="col col-md-12">
                   <input
                     class="w-100 form-control"
                     type="text"
-                    placeholder="<%= company.roleURL %>"
-                    id="roleURL"
+                    placeholder="Role/Position"
+                    id="role"
                     name="role"
                   />
                 </div>
@@ -151,6 +159,9 @@
               <div class="row m-2">
                 <div class="col col-md-12">
                   <label for="roleURL">Role/Position URL:</label>
+                  <span class="edit-label text-muted"
+                    ><%= company.roleURL %></span
+                  >
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -167,6 +178,9 @@
               <div class="row m-2">
                 <div class="col col-md-12">
                   <label for="position">Position Type:</label>
+                  <span class="edit-label text-muted"
+                    ><%= company.position %></span
+                  >
                 </div>
                 <div class="col col-md-12">
                   <select
@@ -193,7 +207,10 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="source">Source:</label>
+                  <label for="source">Source: </label>
+                  <span class="edit-label text-muted"
+                    ><%= company.source %></span
+                  >
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -218,7 +235,10 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="pocName">Name of Contact:</label>
+                  <label for="pocName">Name of Contact: </label>
+                  <span class="edit-label text-muted"
+                    ><%= company.pointOfContact.name %></span
+                  >
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -234,7 +254,10 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="pocPosition">Position of Contact:</label>
+                  <label for="pocPosition">Position of Contact: </label>
+                  <span class="edit-label text-muted"
+                    ><%= company.pointOfContact.position %></span
+                  >
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -250,7 +273,10 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="pocEmail">Email of Contact:</label>
+                  <label for="pocEmail">Email of Contact: </label>
+                  <span class="edit-label text-muted"
+                    ><%= company.pointOfContact.email %></span
+                  >
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -285,6 +311,9 @@
                     value="yes"
                   />
                   <label class="form-check-label" for="applied">Applied?</label>
+                  <span class="edit-label text-muted">
+                    <%= company.application.applied?"Yes":"No" %></span
+                  >
                 </div>
               </div>
             </div>
@@ -300,6 +329,8 @@
                   />
                   <label class="form-check-label" for="coffeeChat"
                     >Coffee Chat?</label
+                  ><span class="edit-label text-muted">
+                    <%= company.application.coffeeChat?"Yes":"No" %></span
                   >
                 </div>
               </div>
@@ -315,7 +346,9 @@
                     value="yes"
                   />
                   <label class="form-check-label" for="saidThanks"
-                    >Said Thanks?</label
+                    >Said Thanks? </label
+                  ><span class="edit-label text-muted">
+                    <%= company.application.saidThanks?"Yes":"No" %></span
                   >
                 </div>
               </div>
@@ -324,7 +357,12 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="applyDate">Application Date:</label>
+                  <label for="applyDate">Application Date: </label>
+                  <span class="edit-label text-muted"
+                    ><%=
+                    company.application.applyDate?.toLocaleDateString("en-US")
+                    %></span
+                  >
                 </div>
                 <div class="col">
                   <input
@@ -340,7 +378,12 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="coffeeChatDate">Coffee Chat Date:</label>
+                  <label for="coffeeChatDate">Coffee Chat Date: </label>
+                  <span class="edit-label text-muted"
+                  ><%=
+                  company.application.coffeeChatDate?.toLocaleDateString("en-US")
+                  %></span
+                >
                 </div>
                 <div class="col">
                   <input
@@ -355,7 +398,12 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="interviewDate">Interview Date:</label>
+                  <label for="interviewDate">Interview Date: </label>
+                  <span class="edit-label text-muted"
+                  ><%=
+                  company.application.interviewDate?.toLocaleDateString("en-US")
+                  %></span
+                >
                 </div>
                 <div class="col">
                   <input
@@ -370,7 +418,12 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="followUpDate">Follow-Up Date:</label>
+                  <label for="followUpDate">Follow-Up Date: </label>
+                  <span class="edit-label text-muted"
+                  ><%=
+                  company.application.followUpDate?.toLocaleDateString("en-US")
+                  %></span
+                >
                 </div>
                 <div class="col">
                   <input
@@ -386,7 +439,12 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="comments">Comments:</label>
+                  <label for="comments">Comments: </label>
+                  <span class="edit-label text-muted"
+                  ><%=
+                  company.application.comments
+                  %></span
+                >
                 </div>
                 <div class="col">
                   <textarea
