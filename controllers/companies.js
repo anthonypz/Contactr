@@ -74,7 +74,7 @@ exports.editCompany = async (req, res) => {
     if (company.userId != req.user.id) {
       res.redirect("/companies");
     } else {
-      res.render("companies/edit", {
+      res.render("editCompany", {
         company,
       });
     }
