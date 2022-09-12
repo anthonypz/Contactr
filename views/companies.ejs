@@ -57,7 +57,7 @@
   </header>
 
   <body class="">
-    <div class="fb-box-shadow rounded-corners p-4 m-4">
+    <div class="py-4 my-4">
       <!-- button to add a company -->
       <div class="container">
         <div class="row">
@@ -82,7 +82,7 @@
               aria-controls="home-tab-pane"
               aria-selected="true"
             >
-              Desktop View
+              Accordion View
             </button>
           </li>
           <li class="nav-item" role="presentation">
@@ -96,7 +96,7 @@
               aria-controls="card-tab-pane"
               aria-selected="false"
             >
-              Mobile View
+              Card View
             </button>
           </li>
         </ul>
@@ -112,7 +112,7 @@
             <!-- Accordion View Content Goes Here -->
             <div class="accordion">
               <% companies.forEach(company => { %>
-              <div class="accordion-item m-4">
+              <div class="accordion-item">
                 <h2
                   class="accordion-header"
                   id="<%= company.companyName %>head"
@@ -129,11 +129,11 @@
                       <h5 class="card-title">
                         Company Name: <%= company.companyName %>
                       </h5>
-                      <h6 class="card-subtitle mb-2 text-muted">
+                      <h6 class="card-subtitle my-2 text-muted">
                         Point of Contact Name: <%= company.pointOfContact.name
                         %>
                       </h6>
-                      <p class="card-text">
+                      <p class="card-text text-muted">
                         Point of Contact Email: <%= company.pointOfContact.email
                         %>
                       </p>
@@ -179,52 +179,72 @@
                           </tr>
                         </tbody>
                       </table>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Company Website</th>
-                            <th scope="col">Role/Position</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td><%= company.url%></td>
-                            <td><%= company.role%></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Role/Position URL</th>
-                            <th scope="col">Position Type</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td><%= company.roleURL%></td>
-                            <td><%= company.position%></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Source</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td><%= company.source%></td>
-                          </tr>
-                        </tbody>
-                      </table>
+                      <div class="table-responsive">
+                        <table
+                          class="table table-sm table-striped table-borderless"
+                        >
+                          <thead>
+                            <tr>
+                              <th scope="col">Company Website</th>
+                              <th scope="col">Role/Position</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <a
+                                  href="<%= company.url || '#' %>"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  ><%= company.companyName %></a
+                                >
+                              </td>
+                              <td><%= company.role%></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="table-responsive">
+                        <table
+                          class="table table-sm table-striped table-borderless"
+                        >
+                          <thead>
+                            <tr>
+                              <th scope="col">Role/Position URL</th>
+                              <th scope="col">Position Type</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <a
+                                  href="<%= company.roleURL || '#' %>"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  ><%= company.role %></a
+                                >
+                              </td>
+                              <td><%= company.position%></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="table-responsive">
+                        <table
+                          class="table table-sm table-striped table-borderless"
+                        >
+                          <thead>
+                            <tr>
+                              <th scope="col">Source</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><%= company.source%></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
 
                       <!--  Point of Contact Table -->
                       <h3 class="mt-4 mb-3">Point of Contact</h3>
@@ -254,7 +274,12 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td><%= company.pointOfContact.email %></td>
+                            <td>
+                              <a
+                                href="mailto:<%= company.pointOfContact.email %>"
+                                ><%= company.pointOfContact.email %></a
+                              >
+                            </td>
                           </tr>
                         </tbody>
                       </table>
