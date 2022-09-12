@@ -63,7 +63,9 @@
       <div class="container">
         <div class="row">
           <div class="col col-12">
-            <h2 class="text-center m-4">Edit Company: <%= company.companyName %></h2>
+            <h2 class="text-center m-4">
+              Edit Company: <%= company.companyName %>
+            </h2>
           </div>
         </div>
       </div>
@@ -96,7 +98,10 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="dateAdded">Date Added:</label>
+                  <label for="dateAdded"
+                    >Date
+                    Added:<%=company.dateAdded?.toLocaleDateString("en-US")%></label
+                  >
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -106,6 +111,7 @@
                     id="dateAdded"
                     name="dateAdded"
                   />
+                  <button class="btn btn-lg btn-primary m-2" type="button" onclick=<%= (e)=> console.log(e.target) %>> Console Log</button>
                 </div>
               </div>
             </div>
