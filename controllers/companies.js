@@ -87,8 +87,9 @@ exports.editCompany = async (req, res) => {
 // @desc    Update company
 // @route   PUT /companies/:id
 exports.updateCompany = async (req, res) => {
+  console.log("Log", req.params)
   try {
-    let company = await Company.findById(req.params.id).lean();
+    let company = await Company.findById(req.body.companyId).lean();
     if (!company) {
       return res.render("error/404");
     }
@@ -99,7 +100,7 @@ exports.updateCompany = async (req, res) => {
         { _id: req.params.id },
         req.body,
         {
-          new: true,
+          // new: true,
           runValidators: true,
         }
       );
