@@ -5,11 +5,19 @@ Array.from(deleteCompanyBtn).forEach((el) => {
 });
 
 
+// Location Tool
+async function locate() {
+  const nodeId = this.dataset.id;
+  console.log(nodeId);
+
+  console.log("This: ", this);
+}
+
 // @route   DELETE /companies/:id
 
 async function deleteCompany() {
   const nodeId = this.parentNode.dataset.id;
-  console.log(nodeId)
+  console.log(nodeId);
   try {
     const response = await fetch("companies/delete", {
       method: "delete",
@@ -25,3 +33,4 @@ async function deleteCompany() {
     console.log(err);
   }
 }
+
