@@ -36,10 +36,9 @@ exports.createCompany = async (req, res) => {
         interviewDate: req.body.interviewDate,
         followUp: req.body.followUp,
       },
-      comments: req.body.comments,
     });
     console.log("Company Data has been added!");
-    console.log(company)
+    console.log(company);
     res.redirect("/companies");
   } catch (err) {
     console.log(err);

@@ -1,28 +1,99 @@
 <!-- list of companies in card format -->
 <div class="row">
-    <div class="col-12">
-        <ul class="list-group">
-            <% companies.forEach(company=> { %>
-                <li class="list-group-item">
-                    <div class="card">
-                        <div class="card-body" data-id='<%=company._id%>'>
-                            <h5 class="card-title">Company Name: <%= company.companyName %>
-                            </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Point of Contact Name: <%=
-                                    company.pointOfContact.name %>
-                            </h6>
-                            <p class="card-text">Point of Contact Email: <%= company.pointOfContact.email %>
-                            </p>
-                            <a href="#<%= company._id %>" class="card-link" data-toggle="collapse">View</a>
-                            <div id="#<%= company._id %>" class="collapse">
-                                Howdy
-                            </div>
-                            <a href="/companies/edit/<%= company._id %>" class="card-link">Edit</a>
-                            <button class='del-company btn btn-danger'>Delete</button>
-                        </div>
+    <% companies.forEach((company, index) => { %>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="h2 text-center"><%= company.companyName %></h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                    <a class="card-title" href="<%= company.rollURL %>" target="_blank"><%= company.role %></a>
+                    <p class="text-muted"><%= company.position %></p>
                     </div>
-                </li>
-                <% }) %>
-        </ul>
-    </div>
+
+                    <!-- Point of Contact Name (Trigger) -->
+                    <p>
+                        Contact: <a class="card-link" data-bs-toggle="modal" data-bs-target="#contactModal<%= index %>"><%= company.pointOfContact.name %></a>
+                    </p>
+
+                    <!-- Application Status (Trigger) -->
+                    <p>
+                        Status: 
+                        <% if (company.application.applied) { %>
+                            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#applicationModal<%= index %>">Applied</button>
+                        <% } else { %>
+                            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#applicationModal<%= index %>">Not Applied</button>
+                        <% } %>
+                    </p>
+                    <!-- Comments (Trigger) -->
+                    <div class="text-center">
+                        <button class="text-center btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#commentsModal<%= index %>">Comments</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Point of Contact Modal -->
+        <div class="modal fade" id="contactModal<%= index %>" tabindex="-1" aria-labelledby="contactModalLabel<%= index %>" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contactModalLabel<%= index %>">Point of Contact</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Name: <%= company.pointOfContact.name %></p>
+                        <p>Position: <%= company.pointOfContact.position %></p>
+                        <p>Email: <%= company.pointOfContact.email %></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application Modal -->
+        <div class="modal fade" id="applicationModal<%= index %>" tabindex="-1" aria-labelledby="applicationModalLabel<%= index %>" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationModalLabel<%= index %>">Application Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Applied: <%= company.application.applied ? 'Yes' : 'No' %></p>
+                        <p>Apply Date: <%= company.application.applyDate ? company.application.applyDate.toDateString() : '' %></p>
+                        <p>Coffee Chat: <%= company.application.coffeeChat ? 'Yes' : 'No' %></p>
+                        <p>Coffee Chat Date: <%= company.application.coffeeChatDate ? company.application.coffeeChatDate.toDateString() : '' %></p>
+                        <p>Said Thanks: <%= company.application.saidThanks ? 'Yes' : 'No' %></p>
+                        <p>Interview Date: <%= company.application.interviewDate ? company.application.interviewDate.toDateString() : '' %></p>
+                        <p>Follow Up: <%= company.application.followUp ? company.application.followUp.toDateString() : '' %></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments Modal -->
+        <div class="modal fade" id="commentsModal<%= index %>" tabindex="-1" aria-labelledby="commentsModalLabel<%= index %>" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">  
+                        <h5 class="modal-title" id="commentsModalLabel<%= index %>">Comments</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>           
+        </div>
+
+    <% }) %>
 </div>

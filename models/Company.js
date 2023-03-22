@@ -31,7 +31,12 @@ const CompanySchema = new mongoose.Schema({
     interviewDate: Date,
     followUp: Date,
   },
-  comments: String,
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
