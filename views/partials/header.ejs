@@ -1,11 +1,27 @@
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand mx-auto" href="/">
-        <!-- Swap IMG src to coffeechat-icon.png after uploading assets -->
-        <img
-          src="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
-          alt="" width="30" height="24" class="d-inline-block align-text-top" />
-        Contactr
-      </a>
+<header class="navbar-space">
+  <nav class="navbar navbar-light bg-white navbar-bottom-shadow">
+    <div class="container">
+      <div class="row d-flex justify-content-between w-100">
+        <div class="col m-1 text-center d-flex justify-content-center">
+          <a class="navbar-brand m-0" href="/">
+            <!-- Swap IMG src to coffeechat-icon.png after uploading assets -->
+            <img
+              src="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
+              alt=""
+              width="30"
+              height="24"
+              class="align-text-top text-center"
+            />
+            Contactr
+          </a>
+        </div>
+        <!-- LogOut Button -->
+        <div class="col text-end">
+          <a href="/logout" class="btn btn-block navbar-right" role="button"
+            >Logout</a
+          >
+        </div>
+      </div>
     </div>
   </nav>
+</header>

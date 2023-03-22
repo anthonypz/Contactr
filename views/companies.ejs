@@ -23,428 +23,71 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
-  <!-- Header / Navbar -->
-  <header class="navbar-space">
-    <nav class="navbar navbar-light bg-white navbar-bottom-shadow">
-      <div class="container">
-        <div class="row d-flex justify-content-between w-100">
-          <div class="col"></div>
-          <div class="col m-1 text-center d-flex justify-content-center">
-            <a class="navbar-brand m-0" href="/">
-              <!-- Swap IMG src to coffeechat-icon.png after uploading assets -->
-              <img
-                src="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
-                alt=""
-                width="30"
-                height="24"
-                class="align-text-top text-center"
-              />
-              Contactr
-            </a>
-          </div>
-          <!-- LogOut Button -->
-          <div class="col text-end">
-            <a
-              href="/logout"
-              class="btn btn-lg btn-danger btn-block navbar-right"
-              role="button"
-              >Logout</a
-            >
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <body class="">
-    <div class="py-4 my-4">
-      <!-- button to add a company -->
-      <div class="container">
-        <div class="row">
-          <div class="col col-12 text-center">
-            <a
-              href="companies/add"
-              class="btn btn-primary btn-lg text-center m-4"
-              >Add Company</a
-            >
-          </div>
-        </div>
-        <!-- Bootstrap Tabs -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link active"
-              id="accordion-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#accordion-tab-pane"
-              type="button"
-              role="tab"
-              aria-controls="home-tab-pane"
-              aria-selected="true"
-            >
-              Accordion View
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="card-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#card-tab-pane"
-              type="button"
-              role="tab"
-              aria-controls="card-tab-pane"
-              aria-selected="false"
-            >
-              Card View
-            </button>
-          </li>
-        </ul>
-        <!-- Content for the Tabs -->
-        <div class="tab-content" id="myTabContent">
-          <div
-            class="tab-pane fade show active"
-            id="accordion-tab-pane"
-            role="tabpanel"
-            aria-labelledby="accordion-tab"
-            tabindex="0"
-          >
-            <!-- Accordion View Content Goes Here -->
-            <div class="accordion">
-              <% companies.forEach(company => { %>
-              <div class="accordion-item">
-                <h2
-                  class="accordion-header"
-                  id="<%= company.companyName %>head"
-                >
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTarget<%= company._id %>"
-                    aria-expanded="false"
-                    aria-controls="<%= company.companyName %>"
-                  >
-                    <div data-id="<%=company._id%>">
-                      <h5 class="card-title">
-                        Company Name: <%= company.companyName %>
-                      </h5>
-                      <h6 class="card-subtitle my-2 text-muted">
-                        Point of Contact Name: <%= company.pointOfContact.name
-                        %>
-                      </h6>
-                      <p class="card-text text-muted">
-                        Point of Contact Email: <%= company.pointOfContact.email
-                        %>
-                      </p>
-                    </div>
-                  </button>
-                </h2>
-                <!-- Collapse Toggle Button -->
-                <div
-                  id="collapseTarget<%= company._id %>"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="headingOne"
-                >
-                  <div class="accordion-body">
-                    <!-- EDIT and DELETE Buttons -->
-                    <div class="text-center m-2" data-id="<%=company._id%>">
-                      <a
-                        href="/companies/edit/<%= company._id %>"
-                        class="card-link btn btn-secondary"
-                        >Edit</a
-                      >
-                      <button class="del-company btn btn-danger">Delete</button>
-                    </div>
-                    <div class="">
-                      <!-- Company Info: -->
-                      <!-- Job Description Table -->
-                      <h3 class="mt-4 mb-3">Job Description</h3>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Company Name</th>
-                            <th scope="col">Date Added</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td><%= company.companyName%></td>
-                            <td>
-                              <%=
-                              company.dateAdded?.toLocaleDateString("en-US")%>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="table-responsive">
-                        <table
-                          class="table table-sm table-striped table-borderless"
-                        >
-                          <thead>
-                            <tr>
-                              <th scope="col">Company Website</th>
-                              <th scope="col">Role/Position</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <a
-                                  href="<%= company.url || '#' %>"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  ><%= company.companyName %></a
-                                >
-                              </td>
-                              <td><%= company.role%></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="table-responsive">
-                        <table
-                          class="table table-sm table-striped table-borderless"
-                        >
-                          <thead>
-                            <tr>
-                              <th scope="col">Role/Position URL</th>
-                              <th scope="col">Position Type</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <a
-                                  href="<%= company.roleURL || '#' %>"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  ><%= company.role %></a
-                                >
-                              </td>
-                              <td><%= company.position%></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="table-responsive">
-                        <table
-                          class="table table-sm table-striped table-borderless"
-                        >
-                          <thead>
-                            <tr>
-                              <th scope="col">Source</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td><%= company.source%></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-
-                      <!--  Point of Contact Table -->
-                      <h3 class="mt-4 mb-3">Point of Contact</h3>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Position at Company</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td><%= company.pointOfContact.name %></td>
-                            <td><%= company.pointOfContact.position %></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Email</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <a
-                                href="mailto:<%= company.pointOfContact.email %>"
-                                ><%= company.pointOfContact.email %></a
-                              >
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                      <!-- Application Table -->
-                      <h3 class="mt-4 mb-3">Application</h3>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Applied</th>
-                            <th scope="col">Apply Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <%= company.application.applied?"Yes":"No" %>
-                            </td>
-                            <td>
-                              <%=
-                              company.application.applyDate?.toLocaleDateString("en-US")
-                              %>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Coffee Chat</th>
-                            <th scope="col">Coffee Chat Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <%= company.application.coffeeChat?"Yes":"No" %>
-                            </td>
-                            <td>
-                              <%=
-                              company.application.coffeeChatDate?.toLocaleDateString("en-US")
-                              %>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table
-                        class="table table-sm table-striped table-borderless"
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col">Said Thanks</th>
-                            <th scope="col">Interview Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <%= company.application.saidThanks?"Yes":"No" %>
-                            </td>
-                            <td>
-                              <%=
-                              company.application.interviewDate?.toLocaleDateString("en-US")
-                              %>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="table-responsive">
-                        <table
-                          class="table table-sm table-striped table-borderless"
-                        >
-                          <thead>
-                            <tr>
-                              <th scope="col">Follow Up Date</th>
-                              <th scope="col">Comments</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <%=
-                                company.application.followUpDate?.toLocaleDateString("en-US")
-                                %>
-                              </td>
-                              <td><%= company.comments %></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <!-- End of Tables -->
-                  </div>
-                </div>
-              </div>
-              <% }) %>
+  <body class="container-fluid">
+    <!-- Header / Navbar -->
+    <header class="navbar-space">
+      <nav class="navbar navbar-light bg-white navbar-bottom-shadow">
+        <div class="container">
+          <div class="row d-flex justify-content-between w-100">
+            <div class="col"></div>
+            <div class="col m-1 text-center d-flex justify-content-center">
+              <a class="navbar-brand m-0" href="/">
+                <!-- Swap IMG src to coffeechat-icon.png after uploading assets -->
+                <img
+                  src="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
+                  alt=""
+                  width="30"
+                  height="24"
+                  class="align-text-top text-center"
+                />
+                Contactr
+              </a>
             </div>
-          </div>
-
-          <div
-            class="tab-pane fade"
-            id="card-tab-pane"
-            role="tabpanel"
-            aria-labelledby="card-tab"
-            tabindex="0"
-          >
-            <!-- MODBILE Card View Content Goes Here -->
-            <!-- list of companies in card format -->
-            <div class="row">
-              <div class="col-12">
-                <ul class="list-group">
-                  <% companies.forEach(company => { %>
-                  <li class="list-group-item">
-                    <div class="card">
-                      <div class="card-body" data-id="<%=company._id%>">
-                        <h5 class="card-title">
-                          Company Name: <%= company.companyName %>
-                        </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                          Point of Contact Name: <%= company.pointOfContact.name
-                          %>
-                        </h6>
-                        <p class="card-text">
-                          Point of Contact Email: <%=
-                          company.pointOfContact.email %>
-                        </p>
-                        <a
-                          href="#<%= company._id %>"
-                          class="card-link"
-                          data-toggle="collapse"
-                          >View</a
-                        >
-                        <div id="#<%= company._id %>" class="collapse">
-                          Howdy
-                        </div>
-                        <a
-                          href="/companies/edit/<%= company._id %>"
-                          class="card-link"
-                          >Edit</a
-                        >
-                        <button class="del-company btn btn-danger">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </li>
-                  <% }) %>
-                </ul>
-              </div>
+            <!-- LogOut Button -->
+            <div class="col text-end">
+              <a href="/logout" class="btn navbar-right" role="button"
+                >Logout</a
+              >
             </div>
           </div>
         </div>
+      </nav>
+    </header>
+
+    <!-- button to add a company -->
+    <div class="row">
+      <div class="col col-12 text-center">
+        <a href="companies/add" class="btn btn-lg text-center">Add Company</a>
       </div>
-      <hr />
-      <!-- LogOut Button -->
-      <a
-        href="/logout"
-        class="btn btn-lg btn-danger btn-block m-2 d-flex justify-content-center w-25 mx-auto"
-        role="button"
-        >Logout</a
-      >
+    </div>
+    <!-- MODBILE Card View Content Goes Here -->
+    <!-- list of companies in card format -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% companies.forEach(company => { %>
+      <div class="col">
+        <div class="card">
+          <div class="card-body" data-id="<%=company._id%>">
+            <h5 class="card-title">Company Name: <%= company.companyName %></h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              Point of Contact Name: <%= company.pointOfContact.name %>
+            </h6>
+            <p class="card-text">
+              Point of Contact Email: <%= company.pointOfContact.email %>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a
+              href="#<%= company._id %>"
+              class="card-link"
+              data-toggle="collapse"
+              >View</a
+            >
+            <a href="/companies/edit/<%= company._id %>" class="btn">Edit</a>
+            <button class="btn">Delete</button>
+          </div>
+        </div>
+      </div>
+      <% }) %>
     </div>
 
     <script src="js/main.js"></script>

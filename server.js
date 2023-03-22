@@ -49,6 +49,6 @@ app.use("/sendfeedback", sendfeedbackRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(
-    `Server is running, you better catch it! It's on port http://localhost:${process.env.PORT}`
+    `Server running on port http://localhost:${process.env.PORT}`
   );
 });
