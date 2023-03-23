@@ -1,3 +1,5 @@
+<!-- Edit page from Company Schema -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,48 +10,375 @@
   <header class="navbar-space"><%- include('partials/__header') %></header>
 
   <body class="">
-    <div class="fb-box-shadow rounded-corners p-4 m-4 text-center text-md-start">
+    <div
+      class="fb-box-shadow rounded-corners p-4 m-4 text-center text-md-start"
+    >
       <!-- Edit Company -->
       <div class="container">
-        <div class="row">
-          <div class="col col-12">
-            <h2 class="text-center m-4">Edit Company</h2>
-          </div>
+        <div class="col col-12">
+          <h2 class="text-center display-3 m-4"><%= company.companyName %></h2>
+          <form
+            action="/companies/<%= company._id %>?_method=DELETE"
+            class="text-center"
+            method="POST"
+            onsubmit="return confirm(`Are you sure you want to delete <%= company.companyName %>?`)"
+          >
+            <button class="btn btn-sm btn-outline-danger" type="submit">
+              Delete
+            </button>
+          </form>
         </div>
       </div>
+      <hr />
+
+      <form action="/companies/<%= company._id %>?_method=PUT" method="POST">
+        <!-- Job Description -->
+        <div class="container align-items-center mx-auto">
+          <div class="row">
+            <div class="col col-12">
+              <h3 class="text-center m-4">Company</h3>
+            </div>
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="companyName"
+                    >Company: <span style="color: red">*</span></label
+                  >
+                </div>
+                <div class="col col-md-12">
+                  <input
+                    class="w-100 form-control"
+                    type="text"
+                    placeholder="Company Name"
+                    id="companyName"
+                    name="companyName"
+                    value="<%= company.companyName %>"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="url">Website</label>
+                </div>
+                <div class="col col-md-12">
+                  <input
+                    class="w-100 form-control"
+                    type="text"
+                    placeholder="URL"
+                    id="url"
+                    name="url"
+                    value="<%= company.url %>"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="roleURL">Role/Position:</label>
+                </div>
+                <div class="col col-md-12">
+                  <input
+                    class="w-100 form-control"
+                    type="text"
+                    placeholder="Role/Position"
+                    id="roleURL"
+                    name="role"
+                    value="<%= company.role %>"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="roleURL">Role/Position URL:</label>
+                </div>
+                <div class="col col-md-12">
+                  <input
+                    class="w-100 form-control"
+                    type="text"
+                    placeholder="Position URL"
+                    id="roleURL"
+                    name="roleURL"
+                    value="<%= company.roleURL %>"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="position">Position Type</label>
+                </div>
+                <div class="col col-md-12">
+                  <select
+                    class="w-100 form-select"
+                    aria-label="select position type"
+                    name="position"
+                    id="position"
+                  >
+                    <option selected value="<%= company.position %>">
+                      <%= company.position %> (current)
+                    </option>
+                    <option value="Full-time Local">Full-time Local</option>
+                    <option value="Full-time Remote">Full-time Remote</option>
+                    <option value="Full-time Hybrid">Full-time Hybrid</option>
+                    <option value="Part-time Local">Part-time Local</option>
+                    <option value="Part-time Remote">Part-time Remote</option>
+                    <option value="Part-time Hybrid">Part-time Hybrid</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Seasonal">Seasonal</option>
+                    <option value="Temporary">Temporary</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="source">Source:</label>
+                </div>
+                <div class="col col-md-12">
+                  <input
+                    class="w-100 form-control"
+                    type="text"
+                    placeholder="Word of Mouth, Job Board, Other"
+                    id="source"
+                    name="source"
+                    value="<%= company.source %>"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <!-- Point of Contact -->
+        <div class="container p-4 align-items-center mx-auto">
+          <div class="row">
+            <div class="col col-12">
+              <h3 class="text-center m-4">Point of Contact</h3>
+            </div>
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="pocName">Name of Contact:</label>
+                </div>
+                <div class="col col-md-12">
+                  <input
+                    class="w-100 form-control"
+                    type="text"
+                    placeholder="Name of Contact"
+                    id="pocName"
+                    name="pocName"
+                    value="<%= company.pointOfContact.name %>"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="pocPosition">Position of Contact:</label>
+                </div>
+                <div class="col col-md-12">
+                  <input
+                    class="w-100 form-control"
+                    type="text"
+                    placeholder="Position of Contact"
+                    id="pocPosition"
+                    name="pocPosition"
+                    value="<%= company.pointOfContact.position %>"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="pocEmail">Email of Contact:</label>
+                </div>
+                <div class="col col-md-12">
+                  <input
+                    class="w-100 form-control"
+                    type="email"
+                    placeholder="Email of Contact"
+                    id="pocEmail"
+                    name="pocEmail"
+                    value="<%= company.pointOfContact.email %>"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <!-- Application -->
+
+        <!-- Check Boxes -->
+
+        <div class="container p-4 align-items-center mx-auto">
+          <div class="row text-center">
+            <div class="col col-12">
+              <h3 class="text-center m-4">Application</h3>
+            </div>
+
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="applied"
+                    name="applied"
+                    value="yes"
+                    />
+                    <label class="form-check-label" for="applied">Applied?</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="coffeeChat"
+                    name="coffeeChat"
+                    value="yes"
+                  />
+                  <label class="form-check-label" for="coffeeChat"
+                    >Coffee Chat?</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="saidThanks"
+                    name="saidThanks"
+                    value="yes"            
+                  />
+                  <label class="form-check-label" for="saidThanks"
+                    >Said Thanks?</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Date Inputs -->
+
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="applyDate">Application Date:</label>
+                </div>
+                <div class="col">
+                  <input
+                    type="date"
+                    class="form-control"
+                    placeholder="Date you applied"
+                    id="applyDate"
+                    name="applyDate"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="coffeeChatDate">Coffee Chat Date:</label>
+                </div>
+                <div class="col">
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="coffeeChatDate"
+                    name="coffeeChatDate"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="interviewDate">Interview Date:</label>
+                </div>
+                <div class="col">
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="interviewDate"
+                    name="interviewDate"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-12 col-md-6 col-xl-4">
+              <div class="row m-2">
+                <div class="col col-md-12">
+                  <label for="followUpDate">Follow-Up Date:</label>
+                </div>
+                <div class="col">
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="followUpDate"
+                    name="followUpDate"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <hr />
 
-        <form action="/companies/<%= company._id %>?_method=PUT" method="POST">
-            <!--  Job Description -->
-            <!-- <div class="form-group">
-                <label for="jobDescription">Job Description</label>
-                <input type="text" class="form-control" id="jobDescription" name="jobDescription" value="<%= company.jobDescription %>" required>
-            </div> -->
-            <!--  Company Name -->
-            <div class="form-group">
-                <label for="companyName">Company Name</label>
-                <input type="text" class="form-control" id="companyName" name="companyName" value="<%= company.companyName %>" required>
-            </div>
-            <!--  Company Website -->
-            <div class="form-group">
-                <label for="companyUrl">Company Website</label>
-                <input type="text" class="form-control" id="url" name="companyUrl" value="<%= company.url %>">
-            </div>
-            <!--  Role -->
-            <div class="form-group">
-                <label for="role">Role</label>
-                <input type="text" class="form-control" id="role" name="role" value="<%= company.role %>" required>
-            </div>
-        
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <form action="/companies/<%= company._id %>?_method=DELETE" method="POST">
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-    </div>
+        <!-- Comments -->
 
-         
+        <div class="container p-4 align-items-center mx-auto">
+          <div class="row text-center">
+            <div class="col col-12">
+              <h3 class="text-center m-4">Comments</h3>
+            </div>
+            <div class="col col-12">
+              <textarea
+                class="w-100 form-control"
+                type="text"
+                placeholder="Comments"
+                id="comments"
+                name="comments"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <hr />
+
+        <div class="container p-4 align-items-center mx-auto">
+          <div class="row text-center">
+            <div class="col col-12">
+              <h3 class="text-center m-4">Submit</h3>
+            </div>
+            <div class="col col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
     <!-- <script src="js/main.js"></script> -->
     <!-- JavaScript Bundle with Popper -->
