@@ -36,6 +36,7 @@ exports.createCompany = async (req, res) => {
         interviewDate: req.body.interviewDate,
         followUp: req.body.followUp,
       },
+      comments: req.body.comments,
     });
     console.log("Company Data has been added!");
     console.log(company);
@@ -61,7 +62,7 @@ exports.showCompanies = async (req, res) => {
 
 // @desc    Show edit page
 // @route   GET /companies/edit/:id
-exports.editCompany = async (req, res) => {
+exports.showEditPage = async (req, res) => {
   try {
     const company = await Company.findOne({
       _id: req.params.id,
@@ -72,7 +73,7 @@ exports.editCompany = async (req, res) => {
     if (company.userId != req.user.id) {
       res.redirect("/companies");
     } else {
-      res.render("companies/edit", {
+      res.render("editCompany.ejs", {
         company,
       });
     }
@@ -110,15 +111,16 @@ exports.updateCompany = async (req, res) => {
 };
 
 // @desc    Delete company
-// @route   DELETE /companies/delete
+// @route   DELETE /companies/:id
 exports.deleteCompany = async (req, res) => {
-  console.log(req.body);
   try {
-    await Company.findOneAndDelete({ _id: req.body.id });
-
-    res.json("Deleted It");
+    await Company.remove({ _id: req.params.id });
+    console.log("Company has been deleted!");
+    res.redirect("/companies");
   } catch (err) {
     console.error(err);
     return res.render("error/500");
   }
-};
+} ;
+
+

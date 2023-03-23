@@ -14,6 +14,7 @@ const CompanySchema = new mongoose.Schema({
   url: String,
   role: String,
   roleURL: String,
+  // jobDescription: String,
   position: String,
   source: String,
   pointOfContact: {
@@ -31,12 +32,7 @@ const CompanySchema = new mongoose.Schema({
     interviewDate: Date,
     followUp: Date,
   },
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Comment',
-    },
-  ],
+  comments: String,
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

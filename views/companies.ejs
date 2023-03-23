@@ -1,80 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <%- include('partials/__head') %>
+  </head>
 
-<head>
-  <%- include('partials/__head') %>
+  <!-- Header / Navbar -->
+  <header class="navbar-space"><%- include('partials/__header') %></header>
 
-</head>
+  <body class="">
+    <!-- Cut>Format>Paste the ul to format with prettier -->
+    <!-- TODO: look into EJS formatting -->
 
-<!-- Header / Navbar -->
-<header class="navbar-space">
-  <%- include('partials/__header') %>
-</header>
-
-<body class="">
-  <!-- Cut>Format>Paste the ul to format with prettier -->
-  <!-- TODO: look into EJS formatting -->
-
-  <!-- button to add a company -->
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <a href="companies/add" class="btn btn-primary">Add Company</a>
+    <!-- button to add a company -->
+    <div class="container">
+      <div class="row">
+        <div class="col col-12">
+          <h2 class="text-center m-4">Companies</h2>
+        </div>
       </div>
+
+      <!-- list of companies in card format -->
+      <div><%- include('partials/__card') %></div>
+
+      <hr />
+      <!-- LogOut Button -->
+      <a
+        href="/logout"
+        class="btn btn-lg btn-danger btn-block m-2 d-flex justify-content-center w-25 mx-auto"
+        role="button"
+        >Logout</a
+      >
     </div>
-
-    <!-- Bootstrap Tabs -->
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="accordion-tab" data-bs-toggle="tab" data-bs-target="#accordion-tab-pane"
-          type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Accordion View</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="card-tab" data-bs-toggle="tab" data-bs-target="#card-tab-pane" type="button"
-          role="tab" aria-controls="card-tab-pane" aria-selected="false">Card View</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#table-tab-pane" type="button"
-          role="tab" aria-controls="table-tab-pane" aria-selected="false">Table View</button>
-      </li>
-    </ul>
-    <!-- Content for the Tabs -->
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="accordion-tab-pane" role="tabpanel" aria-labelledby="accordion-tab"
-        tabindex="0">
-        <!-- Accordion View Content Goes Here -->
-
-        <%- include('partials/__accordion') %>
-
-      </div>
-      <div class="tab-pane fade" id="card-tab-pane" role="tabpanel" aria-labelledby="card-tab" tabindex="0">
-        <!-- Card View Content Goes Here -->
-
-        <%- include('partials/__card') %>
-
-      </div>
-
-      <div class="tab-pane fade" id="table-tab-pane" role="tabpanel" aria-labelledby="table-tab" tabindex="0">
-        <!-- Table View Content Goes Here -->
-
-        <!-- empty so far -->
-        <!-- <%- include('partials/__table') %> -->
-
-      </div>
-    </div>
-
-    <hr>
-    <!-- LogOut Button -->
-    <a href="/logout" class="btn btn-lg btn-danger btn-block m-2 d-flex justify-content-center w-25 mx-auto"
-      role="button">Logout</a>
 
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"
+    ></script>
     <script src="js/companies.js"></script>
     <script src="js/main.js"></script>
-
-</body>
-
+  </body>
 </html>

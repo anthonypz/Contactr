@@ -17,15 +17,15 @@ router.get("/", ensureAuth, companyController.showCompanies);
 
 // @desc    Show edit page
 // @route   GET /companies/edit/:id
-router.get("/edit/:id", ensureAuth, companyController.editCompany);
+router.get("/edit/:id", ensureAuth, companyController.showEditPage);
 
 // @desc    Update company
 // @route   PUT /companies/:id
 router.put("/:id", ensureAuth, companyController.updateCompany);
 
 // @desc    Delete company
-// @route   DELETE /companies/delete
-router.delete("/delete", ensureAuth, companyController.deleteCompany);
+// @route   DELETE /companies/:id
+router.delete("/:id", ensureAuth, companyController.deleteCompany);
 
 
 module.exports = router;
