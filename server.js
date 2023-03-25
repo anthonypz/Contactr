@@ -6,6 +6,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("express-flash");
 const logger = require("morgan");
+const methodOverride = require("method-override");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const todoRoutes = require("./routes/todos");
@@ -22,9 +23,21 @@ connectDB();
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 app.use(logger("dev"));
+
+// Debugging
+app.use((req, res, next) => {
+  console.log(`Request method: ${req.method}, path: ${req.path}`);
+  next();
+});
+app.use((req, res, next) => {
+  console.log("Request body: ", req.body);
+  next();
+});
+
 // Sessions
 app.use(
   session({

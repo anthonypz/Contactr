@@ -14,6 +14,7 @@ const CompanySchema = new mongoose.Schema({
   url: String,
   role: String,
   roleURL: String,
+  // jobDescription: String,
   position: String,
   source: String,
   pointOfContact: {

@@ -1,90 +1,49 @@
+<!-- Edit page from Company Schema -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contactr</title>
-    <link
-      rel="icon"
-      href="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
-    />
-
-    <!-- CSS only -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
-    <!-- Work around Fix for MIME issue, it seemed to originate from possible render / redirect issues from back end -->
-    <!-- Notice the below href value does NOT have a slash (/) where as the addCompany.ejs includes a slash (/) -->
-    <link rel="stylesheet" href="/css/style.css" />
+    <%- include('partials/__head') %>
   </head>
 
   <!-- Header / Navbar -->
-  <header class="navbar-space">
-    <nav class="navbar navbar-light bg-white navbar-bottom-shadow">
-      <div class="container">
-        <div class="row d-flex justify-content-between w-100">
-          <div class="col"></div>
-          <div class="col m-1 text-center d-flex justify-content-center">
-            <a class="navbar-brand m-0" href="/">
-              <!-- Swap IMG src to coffeechat-icon.png after uploading assets -->
-              <img
-                src="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
-                alt=""
-                width="30"
-                height="24"
-                class="align-text-top text-center"
-              />
-              Contactr
-            </a>
-          </div>
-          <!-- LogOut Button -->
-          <div class="col text-end">
-            <a
-              href="/logout"
-              class="btn btn-lg btn-danger btn-block navbar-right"
-              role="button"
-              >Logout</a
-            >
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <header class="navbar-space"><%- include('partials/__header') %></header>
 
-  <body>
+  <body class="">
     <div
       class="fb-box-shadow rounded-corners p-4 m-4 text-center text-md-start"
     >
-      <!-- Add a Company -->
+      <!-- Edit Company -->
       <div class="container">
-        <div class="row">
-          <div class="col col-12">
-            <h2 class="text-center m-4">
-              Edit Company: <%= company.companyName %>
-            </h2>
-          </div>
+        <div class="col col-12">
+          <h2 class="text-center display-3 m-4"><%= company.companyName %></h2>
+          <form
+            action="/companies/<%= company._id %>?_method=DELETE"
+            class="text-center"
+            method="POST"
+            onsubmit="return confirm(`Are you sure you want to delete <%= company.companyName %>?`)"
+          >
+            <button class="btn btn-sm btn-outline-danger" type="submit">
+              Delete
+            </button>
+          </form>
         </div>
       </div>
-      <form action="/companies/edit" method="PUT">
+      <hr />
+
+      <form action="/companies/<%= company._id %>?_method=PUT" method="POST">
         <!-- Job Description -->
         <div class="container align-items-center mx-auto">
           <div class="row">
             <div class="col col-12">
-              <h3 class="text-center m-4">Job Description</h3>
+              <h3 class="text-center m-4">Company</h3>
             </div>
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
                   <label for="companyName"
-                    >Company<span style="color: red">*</span>:
-                  </label>
-                  <span class="edit-label text-muted">
-                    <%= company.companyName %>
-                  </span>
+                    >Company: <span style="color: red">*</span></label
+                  >
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -93,35 +52,16 @@
                     placeholder="Company Name"
                     id="companyName"
                     name="companyName"
-                    required
+                    value="<%= company.companyName %>"
                   />
                 </div>
               </div>
             </div>
+
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="dateAdded">Date Added: </label>
-                  <span class="edit-label text-muted"
-                    ><%=company.dateAdded?.toLocaleDateString("en-US")%></span
-                  >
-                </div>
-                <div class="col col-md-12">
-                  <input
-                    class="w-100 form-control"
-                    type="date"
-                    placeholder="Date Added"
-                    id="dateAdded"
-                    name="dateAdded"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="col col-12 col-md-6 col-xl-4">
-              <div class="row m-2">
-                <div class="col col-md-12">
-                  <label for="url">Company Website: </label>
-                  <span class="edit-label text-muted"><%= company.url %></span>
+                  <label for="url">Website</label>
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -130,6 +70,7 @@
                     placeholder="URL"
                     id="url"
                     name="url"
+                    value="<%= company.url %>"
                   />
                 </div>
               </div>
@@ -137,20 +78,16 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="roleURL"
-                    >Role/Position:
-                    <span class="edit-label text-muted"
-                      ><%= company.role %></span
-                    ></label
-                  >
+                  <label for="roleURL">Role/Position:</label>
                 </div>
                 <div class="col col-md-12">
                   <input
                     class="w-100 form-control"
                     type="text"
                     placeholder="Role/Position"
-                    id="role"
+                    id="roleURL"
                     name="role"
+                    value="<%= company.role %>"
                   />
                 </div>
               </div>
@@ -159,9 +96,6 @@
               <div class="row m-2">
                 <div class="col col-md-12">
                   <label for="roleURL">Role/Position URL:</label>
-                  <span class="edit-label text-muted"
-                    ><%= company.roleURL %></span
-                  >
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -170,6 +104,7 @@
                     placeholder="Position URL"
                     id="roleURL"
                     name="roleURL"
+                    value="<%= company.roleURL %>"
                   />
                 </div>
               </div>
@@ -177,10 +112,7 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="position">Position Type:</label>
-                  <span class="edit-label text-muted"
-                    ><%= company.position %></span
-                  >
+                  <label for="position">Position Type</label>
                 </div>
                 <div class="col col-md-12">
                   <select
@@ -189,7 +121,9 @@
                     name="position"
                     id="position"
                   >
-                    <option selected value="">Choose position type</option>
+                    <option selected value="<%= company.position %>">
+                      <%= company.position %> (current)
+                    </option>
                     <option value="Full-time Local">Full-time Local</option>
                     <option value="Full-time Remote">Full-time Remote</option>
                     <option value="Full-time Hybrid">Full-time Hybrid</option>
@@ -207,10 +141,7 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="source">Source: </label>
-                  <span class="edit-label text-muted"
-                    ><%= company.source %></span
-                  >
+                  <label for="source">Source:</label>
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -219,6 +150,7 @@
                     placeholder="Word of Mouth, Job Board, Other"
                     id="source"
                     name="source"
+                    value="<%= company.source %>"
                   />
                 </div>
               </div>
@@ -235,10 +167,7 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="pocName">Name of Contact: </label>
-                  <span class="edit-label text-muted"
-                    ><%= company.pointOfContact.name %></span
-                  >
+                  <label for="pocName">Name of Contact:</label>
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -247,6 +176,7 @@
                     placeholder="Name of Contact"
                     id="pocName"
                     name="pocName"
+                    value="<%= company.pointOfContact.name %>"
                   />
                 </div>
               </div>
@@ -254,10 +184,7 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="pocPosition">Position of Contact: </label>
-                  <span class="edit-label text-muted"
-                    ><%= company.pointOfContact.position %></span
-                  >
+                  <label for="pocPosition">Position of Contact:</label>
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -266,6 +193,7 @@
                     placeholder="Position of Contact"
                     id="pocPosition"
                     name="pocPosition"
+                    value="<%= company.pointOfContact.position %>"
                   />
                 </div>
               </div>
@@ -273,10 +201,7 @@
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="pocEmail">Email of Contact: </label>
-                  <span class="edit-label text-muted"
-                    ><%= company.pointOfContact.email %></span
-                  >
+                  <label for="pocEmail">Email of Contact:</label>
                 </div>
                 <div class="col col-md-12">
                   <input
@@ -285,6 +210,7 @@
                     placeholder="Email of Contact"
                     id="pocEmail"
                     name="pocEmail"
+                    value="<%= company.pointOfContact.email %>"
                   />
                 </div>
               </div>
@@ -293,30 +219,30 @@
         </div>
         <hr />
         <!-- Application -->
+
         <!-- Check Boxes -->
+
         <div class="container p-4 align-items-center mx-auto">
           <div class="row text-center">
             <div class="col col-12">
               <h3 class="text-center m-4">Application</h3>
             </div>
+
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    placeholder="Applied?"
                     id="applied"
                     name="applied"
                     value="yes"
-                  />
-                  <label class="form-check-label" for="applied">Applied?</label>
-                  <span class="edit-label text-muted">
-                    <%= company.application.applied?"Yes":"No" %></span
-                  >
+                    />
+                    <label class="form-check-label" for="applied">Applied?</label>
                 </div>
               </div>
             </div>
+
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
@@ -329,12 +255,11 @@
                   />
                   <label class="form-check-label" for="coffeeChat"
                     >Coffee Chat?</label
-                  ><span class="edit-label text-muted">
-                    <%= company.application.coffeeChat?"Yes":"No" %></span
                   >
                 </div>
               </div>
             </div>
+
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
@@ -343,26 +268,21 @@
                     type="checkbox"
                     id="saidThanks"
                     name="saidThanks"
-                    value="yes"
+                    value="yes"            
                   />
                   <label class="form-check-label" for="saidThanks"
-                    >Said Thanks? </label
-                  ><span class="edit-label text-muted">
-                    <%= company.application.saidThanks?"Yes":"No" %></span
+                    >Said Thanks?</label
                   >
                 </div>
               </div>
             </div>
+
             <!-- Date Inputs -->
+
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="applyDate">Application Date: </label>
-                  <span class="edit-label text-muted"
-                    ><%=
-                    company.application.applyDate?.toLocaleDateString("en-US")
-                    %></span
-                  >
+                  <label for="applyDate">Application Date:</label>
                 </div>
                 <div class="col">
                   <input
@@ -375,15 +295,11 @@
                 </div>
               </div>
             </div>
+
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="coffeeChatDate">Coffee Chat Date: </label>
-                  <span class="edit-label text-muted"
-                  ><%=
-                  company.application.coffeeChatDate?.toLocaleDateString("en-US")
-                  %></span
-                >
+                  <label for="coffeeChatDate">Coffee Chat Date:</label>
                 </div>
                 <div class="col">
                   <input
@@ -395,15 +311,11 @@
                 </div>
               </div>
             </div>
+
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="interviewDate">Interview Date: </label>
-                  <span class="edit-label text-muted"
-                  ><%=
-                  company.application.interviewDate?.toLocaleDateString("en-US")
-                  %></span
-                >
+                  <label for="interviewDate">Interview Date:</label>
                 </div>
                 <div class="col">
                   <input
@@ -415,15 +327,11 @@
                 </div>
               </div>
             </div>
+
             <div class="col col-12 col-md-6 col-xl-4">
               <div class="row m-2">
                 <div class="col col-md-12">
-                  <label for="followUpDate">Follow-Up Date: </label>
-                  <span class="edit-label text-muted"
-                  ><%=
-                  company.application.followUpDate?.toLocaleDateString("en-US")
-                  %></span
-                >
+                  <label for="followUpDate">Follow-Up Date:</label>
                 </div>
                 <div class="col">
                   <input
@@ -435,45 +343,44 @@
                 </div>
               </div>
             </div>
-            <!-- Comments Text Area -->
-            <div class="col col-12 col-md-6 col-xl-4">
-              <div class="row m-2">
-                <div class="col col-md-12">
-                  <label for="comments">Comments: </label>
-                  <span class="edit-label text-muted"
-                  ><%=
-                  company.application.comments
-                  %></span
-                >
-                </div>
-                <div class="col">
-                  <textarea
-                    name="comments"
-                    placeholder="Comments"
-                    id="comments"
-                    class="form-control"
-                    rows="4"
-                    cols="25"
-                  ></textarea>
-                </div>
-              </div>
+          </div>
+        </div>
+        <hr />
+
+        <!-- Comments -->
+
+        <div class="container p-4 align-items-center mx-auto">
+          <div class="row text-center">
+            <div class="col col-12">
+              <h3 class="text-center m-4">Comments</h3>
+            </div>
+            <div class="col col-12">
+              <textarea
+                class="w-100 form-control"
+                type="text"
+                placeholder="Comments"
+                id="comments"
+                name="comments"
+              ></textarea>
             </div>
           </div>
-          <!-- Submit Button -->
-          <div class="row">
-            <div class="col col-12 text-center">
-              <a href="/companies" class="btn btn-lg btn-secondary m-2"
-                >Cancel</a
-              >
-              <button class="btn btn-lg btn-primary m-2" type="submit">
-                Save
-              </button>
+        </div>
+        <hr />
+
+        <div class="container p-4 align-items-center mx-auto">
+          <div class="row text-center">
+            <div class="col col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col col-12">
+              <button type="reset" class="btn btn-primary">Reset</button>
             </div>
           </div>
         </div>
       </form>
     </div>
 
+    <!-- <script src="js/main.js"></script> -->
     <!-- JavaScript Bundle with Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
