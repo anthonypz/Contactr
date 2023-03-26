@@ -2,12 +2,12 @@
 <div class="row">
   <% companies.forEach((company, index) => { %>
   <div class="col-md-3 mb-4">
-    <div class="card" style="height: 22em;" id="card<%= index %>">
+    <div class="card" id="card<%= index %>">
       <div class="card-header">
         <h5 class="h2 text-center"><%= company.companyName %></h5>
       </div>
       <div class="card-body">
-        <div class="text-center m-2" style="height: 3em;">
+        <div class="text-center m-2">
           <a class="card-title" href="<%= company.rollURL %>" target="_blank"
             ><%= company.role %></a
           >

@@ -15,12 +15,37 @@
 </head>
 
 <body>
-  <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-  <div class="alert alert-danger"><%= el.msg %></div>
-  <% }) %> <% } %> <% if (locals.messages.info) { %> <% messages.info.forEach(
-    el => { %>
-  <div class="alert alert-danger"><%= el.msg %></div>
-  <% }) %> <% } %>
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <!-- Swap IMG src to coffeechat-icon.png after uploading assets -->
+      <img
+        src="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
+        alt=""
+        width="30" 
+        height="24" 
+        class="d-inline-block align-text-top"
+      />
+      Contactr
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav ms-auto">
+        <a class="btn btn-outline-dark" href="/signup">Create an Account</a>      
+    </div>
+  </div>
+</nav>
+
 
   <form class="form-signin text-center" action="/login" method="POST">
     <div class="container">
@@ -32,7 +57,7 @@
           </div>
         </div>
       </div>
-      <h1 class="h3 font-weight-normal">Please log in</h1>
+      <h1 class="h3 font-weight-normal">Log In</h1>
       <label for="inputEmail" class="sr-only mt-2">Email address</label>
       <div class="d-flex justify-content-center m-2">
         <div class="row">
@@ -52,13 +77,10 @@
         </div>
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block m-2" type="submit">
+      <button class="btn btn-outline-primary btn-block m-2" type="submit">
         Log In
       </button>
-
-      <a class="btn btn-lg btn-success btn-block m-2" href="/signup" role="button">
-        Sign up</a>
-      <p class="m-4 text-muted">© 2022</p>
+      <a class="btn btn-outline-secondary btn-block m-2" href="/auth/google" role="button">Google Login</a>
     </div>
   </form>
   <hr class="w-50 mx-auto" />
@@ -67,11 +89,13 @@
       autofocus="" value="admin@admin.com" />
     <input type="hidden" name="password" id="inputPasswordDemo" class="form-control" placeholder="Password" required=""
       value="admin1234" />
-    <button class="btn btn-lg btn-secondary btn-block m-2" type="submit">
-      Demo Sign in
+    <button class="btn btn-success btn-block m-2" type="submit">
+      Demo
     </button>
-    <a class="btn btn-lg btn-secondary btn-block m-2" href="/auth/google" role="button">Sign In with Google</a>
   </form>
+
+    <!-- Footer-->
+    <div><%- include('partials/__footer') %></div>
 
   <!-- JavaScript Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

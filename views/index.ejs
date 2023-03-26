@@ -25,31 +25,36 @@
 
 <body id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-    <div class="container px-5">
-      <a class="navbar-brand fw-bold" href="/login">Contactr <img src="/assets/Contactr-logos/coffeechat-icon.png"
-          alt="Contactr Logo" width="72" height="72"></img>
-      </a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="bi-list"></i>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <!-- Swap IMG src to coffeechat-icon.png after uploading assets -->
+        <img
+          src="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
+          alt=""
+          width="30" 
+          height="24" 
+          class="d-inline-block align-text-top"
+        />
+        Contactr
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-          <li class="nav-item">
-            <a class="nav-link me-lg-3" href="/login">Log In</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link me-lg-3" href="/signup">Sign Up</a>
-          </li>
-        </ul>
-        <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal"
-          data-bs-target="#feedbackModal">
-          <span class="d-flex align-items-center">
-            <i class="bi-chat-text-fill me-2"></i>
-            <span class="small">Send Feedback</span>
-          </span>
-        </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav">
+        </div>
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="/login">Login</a>
+          <a class="btn btn-outline-dark" href="/signup">Create an Account</a>
       </div>
     </div>
   </nav>
@@ -69,7 +74,6 @@
             <div class="d-flex flex-column flex-lg-row align-items-center">
               <a class="me-lg-3 mb-4 mb-lg-0 fb-box-shadow" href="https://github.com/anthonypz/todo-mvc-auth-local"><img
                   class="app-badge" src="assets/img/GitHub-Button.png" alt="..." /></a>
-
             </div>
           </div>
         </div>
@@ -246,30 +250,11 @@
       </div>
     </div>
   </section>
-  <!-- App badge section-->
-  <section class="bg-gradient-primary-to-secondary" id="download">
-    <div class="container px-5">
-      <!-- <h2 class="text-center text-white font-alt mb-4">Insert something clever...</h2> -->
-      <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
-        <a class="me-lg-3 mb-4 mb-lg-0" href="/login"><img class="app-badge"
-            src="https://github.com/anthonypz/todo-mvc-auth-local/blob/main/public/assets/Contactr-logos/coffeechat-icon.png?raw=true"
-            alt="Contactr Icon" /></a>
-      </div>
-    </div>
-  </section>
-  <!-- Footer-->
-  <footer class="bg-black text-center py-5">
-    <div class="container px-5">
-      <div class="text-white-50 small">
-        <div class="mb-2">&copy; Contactr 2022. All Rights Reserved.</div>
-        <a href="#!">Privacy</a>
-        <span class="mx-1">&middot;</span>
-        <a href="#!">Terms</a>
-        <span class="mx-1">&middot;</span>
-        <a href="#!">FAQ</a>
-      </div>
-    </div>
-  </footer>
+
+  
+    <!-- Footer-->
+    <div><%- include('partials/__footer') %></div>
+
   <!-- Feedback Modal-->
   <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

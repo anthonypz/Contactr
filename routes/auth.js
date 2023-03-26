@@ -16,4 +16,5 @@ router.get(
     res.redirect("/companies");
   }
 );
+
 module.exports = router;
