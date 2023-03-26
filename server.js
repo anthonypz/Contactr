@@ -28,15 +28,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(logger("dev"));
 
-// Debugging
-app.use((req, res, next) => {
-  console.log(`Request method: ${req.method}, path: ${req.path}`);
-  next();
-});
-app.use((req, res, next) => {
-  console.log("Request body: ", req.body);
-  next();
-});
+// // Debugging
+// app.use((req, res, next) => {
+//   console.log(`Request method: ${req.method}, path: ${req.path}`);
+//   next();
+// });
+// app.use((req, res, next) => {
+//   console.log("Request body: ", req.body);
+//   next();
+// });
 
 // Sessions
 app.use(
@@ -55,7 +55,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use("/", mainRoutes);
-app.use("/todos", todoRoutes);
+// app.use("/todos", todoRoutes);
 app.use("/companies", companyRoutes);
 app.use("/auth", authRoutes);
 app.use("/sendfeedback", sendfeedbackRoutes);
