@@ -132,15 +132,17 @@
           <div class="row gap-3 mb-3">
             <div class="col-sm">
               <input class="form-check-input" type="checkbox" placeholder="Applied?" id="applied" name="applied"
-                value="yes" />
+                value="yes" <%= company.application.applied && 'checked' %> />
               <label class="form-check-label" for="applied">Applied?</label>
             </div>
             <div class="col-sm">
-              <input class="form-check-input" type="checkbox" id="coffeeChat" name="coffeeChat" value="yes" />
+              <input class="form-check-input" type="checkbox" id="coffeeChat" name="coffeeChat" value="yes"
+                <%= company.application.coffeeChat && 'checked' %> />
               <label class="form-check-label" for="coffeeChat">Coffee Chat?</label>
             </div>
             <div class="col-sm">
-              <input class="form-check-input" type="checkbox" id="saidThanks" name="saidThanks" value="yes" />
+              <input class="form-check-input" type="checkbox" id="saidThanks" name="saidThanks" value="yes"
+                <%= company.application.saidThanks && 'checked' %> />
               <label class="form-check-label" for="saidThanks">Said Thanks?</label>
             </div>
           </div>
