@@ -40,10 +40,9 @@
                 name="companyName" value="<%= company.companyName %>" />
             </div>
             <div class="col-md">
-              <!-- TODO convert date to a format the browser can read -->
               <label for="dateAdded">Date Added:</label>
               <input class="w-100 form-control" type="date" placeholder="Date Added" id="dateAdded" name="dateAdded"
-                value="<%= company.dateAdded %>" />
+                value="<%= company?.dateAdded.toISOString().slice(0, 10) %>" />
             </div>
             <div class="col-md">
               <label for="url">Website</label>
@@ -154,23 +153,27 @@
           <div class="row gap-3 mb-3">
             <div class="col-sm">
               <label for="applyDate">Application Date:</label>
-              <input type="date" class="form-control" placeholder="Date you applied" id="applyDate" name="applyDate" />
+              <input type="date" class="form-control" placeholder="Date you applied" id="applyDate" name="applyDate"
+                value="<%= company.application.applyDate?.toISOString().slice(0, 10) %>" />
             </div>
 
             <div class="col-sm">
               <label for="coffeeChatDate">Coffee Chat Date:</label>
-              <input type="date" class="form-control" id="coffeeChatDate" name="coffeeChatDate" />
+              <input type="date" class="form-control" id="coffeeChatDate" name="coffeeChatDate"
+                value="<%= company.application.coffeeChatDate?.toISOString().slice(0, 10) %>" />
             </div>
           </div>
           <!-- date row 2 -->
           <div class="row gap-3 mb-3">
             <div class="col-sm">
               <label for="followUpDate">Follow-Up Date:</label>
-              <input type="date" class="form-control" id="followUpDate" name="followUpDate" />
+              <input type="date" class="form-control" id="followUpDate" name="followUpDate"
+                value="<%= company.application.followUpDate?.toISOString().slice(0, 10) %>" />
             </div>
             <div class="col-sm">
               <label for="interviewDate">Interview Date:</label>
-              <input type="date" class="form-control" id="interviewDate" name="interviewDate" />
+              <input type="date" class="form-control" id="interviewDate" name="interviewDate"
+                value="<%= company.application.interviewDate?.toISOString().slice(0, 10) %>" />
             </div>
           </div>
         </div>
