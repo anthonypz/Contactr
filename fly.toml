@@ -1,8 +1,9 @@
-# fly.toml file generated for contactr on 2022-10-10T18:57:01-07:00
+# fly.toml file generated for contactr on 2023-04-03T19:07:01-07:00
 
 app = "contactr"
 kill_signal = "SIGINT"
 kill_timeout = 5
+primary_region = "lax"
 processes = []
 
 [build]
