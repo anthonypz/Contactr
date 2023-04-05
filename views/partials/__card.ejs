@@ -16,9 +16,11 @@
       <!-- Card Body starts here -->
       <div class="card-body">
         <!-- Company/Job Info (Trigger) -->
-        <div class="text-center m-2">
+        <div class="text-center pb-2">
           <a class="card-title" href="<%= company.rollURL %>" target="_blank"><%= company.role %></a>
           <p class="text-muted"><%= company.position %></p>
+          <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
+            data-bs-target="#companyModal<%= index %>">View Company Info</button>
         </div>
 
         <!-- Point of Contact Name (Trigger) -->
@@ -76,6 +78,41 @@
   </div>
 
   <!-- Modals related code starts here -->
+
+  <!-- Company Info Modal -->
+  <div class="modal fade" id="companyModal<%= index %>" tabindex="-1" aria-labelledby="jobModalLabel<%= index %>"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="contactModalLabel<%= index %>">
+            Company Info
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="fw-semibold">Company: <span class="fw-normal"><%= company.companyName || 'N/A' %></span></p>
+          <p class="fw-semibold">Date Added: <span
+              class="fw-normal"><%= company.dateAdded?.toDateString() || 'N/A' %></span></p>
+          <p class="fw-semibold">Company Website: <span class="fw-normal"><%= company.url || 'N/A' %></span>
+          </p>
+          <p class="fw-semibold">Job Title: <span class="fw-normal"><%= company.role || 'N/A' %></span>
+          </p>
+          <p class="fw-semibold">Job Post URL: <span class="fw-normal"><%= company.roleURL || 'N/A' %></span>
+          </p>
+          <p class="fw-semibold">Position Type: <span class="fw-normal"><%= company.position || 'N/A' %></span>
+          </p>
+          <p class="fw-semibold">Job Post Source: <span class="fw-normal"><%= company.source || 'N/A' %></span>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Point of Contact Modal -->
   <div class="modal fade" id="contactModal<%= index %>" tabindex="-1" aria-labelledby="contactModalLabel<%= index %>"
