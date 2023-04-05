@@ -45,7 +45,7 @@
                 value="<%= company.dateAdded?.toISOString().slice(0, 10) %>" />
             </div>
             <div class="col-md">
-              <label for="url">Website</label>
+              <label for="url">Company Website:</label>
               <input class="w-100 form-control" type="text" placeholder="URL" id="url" name="url"
                 value="<%= company.url %>" />
             </div>
@@ -53,12 +53,12 @@
 
           <div class="row gap-3 mb-3">
             <div class="col-md">
-              <label for="roleURL">Role/Position:</label>
-              <input class="w-100 form-control" type="text" placeholder="Role/Position" id="roleURL" name="role"
+              <label for="role">Job Title:</label>
+              <input class="w-100 form-control" type="text" placeholder="Role/Position" id="role" name="role"
                 value="<%= company.role %>" />
             </div>
             <div class="col-md">
-              <label for="roleURL">Role/Position URL:</label>
+              <label for="roleURL">Job Post URL:</label>
               <input class="w-100 form-control" type="text" placeholder="Position URL" id="roleURL" name="roleURL"
                 value="<%= company.roleURL %>" />
             </div>
@@ -106,7 +106,7 @@
                 value="<%= company.pointOfContact.name %>" />
             </div>
             <div class=" col-md">
-              <label for="pocPosition">Position of Contact:</label>
+              <label for="pocPosition">Job Title of Contact:</label>
               <input class="w-100 form-control" type="text" placeholder="Position of Contact" id="pocPosition"
                 name="pocPosition" value="<%= company.pointOfContact.position %>" />
             </div>
@@ -126,23 +126,27 @@
       <div class="container align-items-center">
         <div class="row text-center">
           <div class="col col-12">
-            <h3 class="text-center m-4">Application</h3>
+            <h3 class="text-center m-4">Job Application</h3>
           </div>
           <div class="row gap-3 mb-3">
-            <div class="col-sm">
+            <div class="col">
               <input class="form-check-input" type="checkbox" placeholder="Applied?" id="applied" name="applied"
                 value="yes" <%= company.application.applied && 'checked' %> />
-              <label class="form-check-label" for="applied">Applied?</label>
+              <label class="form-check-label" for="applied">Have I Applied?</label>
             </div>
-            <div class="col-sm">
+          </div>
+          <div class="row gap-3 mb-3">
+            <div class="col">
               <input class="form-check-input" type="checkbox" id="coffeeChat" name="coffeeChat" value="yes"
                 <%= company.application.coffeeChat && 'checked' %> />
-              <label class="form-check-label" for="coffeeChat">Coffee Chat?</label>
+              <label class="form-check-label" for="coffeeChat">Have I done a Coffee Chat?</label>
             </div>
-            <div class="col-sm">
+          </div>
+          <div class="row gap-3 mb-3">
+            <div class="col">
               <input class="form-check-input" type="checkbox" id="saidThanks" name="saidThanks" value="yes"
                 <%= company.application.saidThanks && 'checked' %> />
-              <label class="form-check-label" for="saidThanks">Said Thanks?</label>
+              <label class="form-check-label" for="saidThanks">Have I sent a thank you note?</label>
             </div>
           </div>
         </div>
@@ -152,7 +156,7 @@
           <!-- date row 1 -->
           <div class="row gap-3 mb-3">
             <div class="col-sm">
-              <label for="applyDate">Application Date:</label>
+              <label for="applyDate">Application Submission Date:</label>
               <input type="date" class="form-control" placeholder="Date you applied" id="applyDate" name="applyDate"
                 value="<%= company.application.applyDate?.toISOString().slice(0, 10) %>" />
             </div>
