@@ -1,239 +1,242 @@
 <!-- list of companies in card format -->
-<div class="row">
-  <% companies.forEach((company, index) => { %>
-  <div class="col-md-3 mb-4">
-    <div class="card" id="card<%= index %>">
-      <div class="card-header">
-        <!-- Make company name a link if a URL is provided -->
-        <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.url)) { %>
-        <a class="link-dark" href="<%= company.url %>" target="_blank" rel="noopener noreferrer">
-          <h1 class="h4 text-center m-0"><%= company.companyName %></h1>
-        </a>
-        <% } else { %>
-        <h1 class="h4 text-center m-0"><%= company.companyName %></h1>
-        <% } %>
-      </div>
-      <!-- Card Body starts here -->
-      <div class="card-body">
-        <!-- Company Info Section -->
-        <div class="text-center pb-2">
-          <p class="mb-1"><%= company.dateAdded?.toDateString() %></p>
-
-          <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.roleURL) && company.role) { %>
-          <a class="card-title" href="<%= company.roleURL %>" target="_blank"
-            rel="noopener noreferrer"><%= company.role %></a>
-          <% } else { %>
-          <p class="card-title"><%= company.role || '' %></p>
-          <% } %>
-
-
-          <p class="text-muted"><%= company.position %></p>
-          <!-- Company/Job Info (Trigger) -->
-          <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
-            data-bs-target="#companyModal<%= index %>">View Company Info</button>
-        </div>
-
-        <!-- Point of Contact Name (Trigger) -->
-        <div class="pb-2">
-          <p class="mb-1 fw-semibold">
-            Point of Contact:
-          </p>
-          <p class="mb-1"><%= company.pointOfContact.name || 'N/A' %></p>
-          <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
-            data-bs-target="#contactModal<%= index %>">View Contact Info</button>
-        </div>
-
-        <!-- Application Status Section -->
-        <div class="pb-2">
-          <p class="mb-1 fw-semibold">
-            Application Status:
-          </p>
-          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-            <button type="button"
-              class="btn btn-sm btn-outline-<%= company.application.applied ? 'success' : 'danger' %>">Applied</button>
-            <button type="button"
-              class="btn btn-sm btn-outline-<%= company.application.coffeeChat ? 'success' : 'danger' %>">Coffee
-              Chat</button>
-            <button type="button"
-              class="btn btn-sm btn-outline-<%= company.application.saidThanks ? 'success' : 'danger' %>">Thank
-              You Note</button>
-          </div>
-          <!-- Application Status (Trigger) -->
-          <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
-            data-bs-target="#applicationModal<%= index %>">
-            View Dates
-          </button>
-        </div>
-        <!-- Comments Section -->
-        <div class="">
-          <p class="mb-1 fw-semibold">
-            Comments:
-          </p>
-          <p class="mb-1 text-truncate">
-            <%= company.comments || "N/A" %>
-          </p>
-          <!-- Comments (Trigger) -->
-          <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
-            data-bs-target="#commentsModal<%= index %>">
-            View Comments
-          </button>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div class="d-flex  flex-row-reverse">
-          <a href="/companies/edit/<%= company._id %>" class="btn btn-outline-primary btn-sm">Edit Company</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modals related code starts here -->
-
-  <!-- Company Info Modal -->
-  <div class="modal fade" id="companyModal<%= index %>" tabindex="-1" aria-labelledby="jobModalLabel<%= index %>"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel<%= index %>">
-            Company Info
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p class="fw-semibold">Company: <span class="fw-normal"><%= company.companyName || 'N/A' %></span></p>
-          <p class="fw-semibold">Date Added: <span
-              class="fw-normal"><%= company.dateAdded?.toDateString() || 'N/A' %></span></p>
-          <!-- validate URL before displaying link -->
+<div class="container my-3">
+  <div class="row">
+    <% companies.forEach((company, index) => { %>
+    <div class="col mb-4 mb-xl-5">
+      <div class="card mx-auto" id="card<%= index %>" style="width: 330px">
+        <div class="card-header">
+          <!-- Make company name a link if a URL is provided -->
           <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.url)) { %>
-          <p class="fw-semibold">Company Website: <span class="fw-normal"><a href="<%= company.url %>" target="_blank"
-                rel="noopener noreferrer"><%= company.url || 'N/A' %></a></span>
-          </p>
+          <a class="link-dark" href="<%= company.url %>" target="_blank" rel="noopener noreferrer">
+            <h1 class="h4 text-center m-0 text-truncate"><%= company.companyName %></h1>
+          </a>
           <% } else { %>
-          <p class="fw-semibold">Company Website: <span class="fw-normal"><%= company.url || 'N/A' %></span>
-          </p>
+          <h1 class="h4 text-center m-0 text-truncate"><%= company.companyName %></h1>
           <% } %>
-
-          <p class="fw-semibold">Job Title: <span class="fw-normal"><%= company.role || 'N/A' %></span>
-          </p>
-
-          <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.roleURL)) { %>
-          <p class="fw-semibold">Job Post URL: <span class="fw-normal"><a href="<%= company.roleURL %>" target="_blank"
-                rel="noopener noreferrer"><%= company.roleURL || 'N/A' %></a></span>
-          </p>
-          <% } else { %>
-          <p class="fw-semibold">Job Post URL: <span class="fw-normal"><%= company.roleURL || 'N/A' %></span>
-          </p>
-          <% } %>
-
-          <p class="fw-semibold">Position Type: <span class="fw-normal"><%= company.position || 'N/A' %></span>
-          </p>
-          <p class="fw-semibold">Job Post Source: <span class="fw-normal"><%= company.source || 'N/A' %></span>
-          </p>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
+        <!-- Card Body starts here -->
+        <div class="card-body">
+          <!-- Company Info Section -->
+          <div class="text-center pb-2 mb-1">
+            <p class="mb-1"><%= company.dateAdded?.toDateString() %></p>
+
+            <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.roleURL) && company.role) { %>
+            <a class="card-title" href="<%= company.roleURL %>" target="_blank"
+              rel="noopener noreferrer"><%= company.role %></a>
+            <% } else { %>
+            <p class="card-title"><%= company.role || '' %></p>
+            <% } %>
+
+
+            <p class="text-muted mb-1"><%= company.position %></p>
+            <!-- Company/Job Info (Trigger) -->
+            <button class="btn btn-sm btn-outline-secondary d-block mt-2 mx-auto" data-bs-toggle="modal"
+              data-bs-target="#companyModal<%= index %>">View Company Info</button>
+          </div>
+
+          <!-- Point of Contact Name (Trigger) -->
+          <div class="pb-2 mb-1">
+            <p class="mb-1 fw-semibold">
+              Point of Contact:
+            </p>
+            <p class="mb-1"><%= company.pointOfContact.name || 'N/A' %></p>
+            <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
+              data-bs-target="#contactModal<%= index %>">View Contact Info</button>
+          </div>
+
+          <!-- Application Status Section -->
+          <div class="pb-2 mb-1">
+            <p class="mb-1 fw-semibold">
+              Application Status:
+            </p>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button type="button"
+                class="btn btn-sm btn-outline-<%= company.application.applied ? 'success' : 'danger' %>">Applied</button>
+              <button type="button"
+                class="btn btn-sm btn-outline-<%= company.application.coffeeChat ? 'success' : 'danger' %>">Coffee
+                Chat</button>
+              <button type="button"
+                class="btn btn-sm btn-outline-<%= company.application.saidThanks ? 'success' : 'danger' %>">Thank
+                You Note</button>
+            </div>
+            <!-- Application Status (Trigger) -->
+            <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
+              data-bs-target="#applicationModal<%= index %>">
+              View Dates
+            </button>
+          </div>
+          <!-- Comments Section -->
+          <div class="">
+            <p class="mb-1 fw-semibold">
+              Comments:
+            </p>
+            <p class="mb-1 text-truncate">
+              <%= company.comments || "N/A" %>
+            </p>
+            <!-- Comments (Trigger) -->
+            <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
+              data-bs-target="#commentsModal<%= index %>">
+              View Comments
+            </button>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex  flex-row-reverse">
+            <a href="/companies/edit/<%= company._id %>" class="btn btn-outline-primary btn-sm">Edit Company</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Point of Contact Modal -->
-  <div class="modal fade" id="contactModal<%= index %>" tabindex="-1" aria-labelledby="contactModalLabel<%= index %>"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel<%= index %>">
-            Point of Contact
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p class="fw-semibold">Name: <span class="fw-normal"><%= company.pointOfContact.name || 'N/A' %></span></p>
-          <p class="fw-semibold">Position: <span
-              class="fw-normal"><%= company.pointOfContact.position || 'N/A' %></span></p>
-          <p class="fw-semibold">Email: <span class="fw-normal"><%= company.pointOfContact.email || 'N/A' %></span></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
+    <!-- Modals related code starts here -->
+
+    <!-- Company Info Modal -->
+    <div class="modal fade" id="companyModal<%= index %>" tabindex="-1" aria-labelledby="jobModalLabel<%= index %>"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="contactModalLabel<%= index %>">
+              Company Info
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="fw-semibold">Company: <span class="fw-normal"><%= company.companyName || 'N/A' %></span></p>
+            <p class="fw-semibold">Date Added: <span
+                class="fw-normal"><%= company.dateAdded?.toDateString() || 'N/A' %></span></p>
+            <!-- validate URL before displaying link -->
+            <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.url)) { %>
+            <p class="fw-semibold">Company Website: <span class="fw-normal"><a href="<%= company.url %>" target="_blank"
+                  rel="noopener noreferrer"><%= company.url || 'N/A' %></a></span>
+            </p>
+            <% } else { %>
+            <p class="fw-semibold">Company Website: <span class="fw-normal"><%= company.url || 'N/A' %></span>
+            </p>
+            <% } %>
+
+            <p class="fw-semibold">Job Title: <span class="fw-normal"><%= company.role || 'N/A' %></span>
+            </p>
+
+            <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.roleURL)) { %>
+            <p class="fw-semibold">Job Post URL: <span class="fw-normal"><a href="<%= company.roleURL %>"
+                  target="_blank" rel="noopener noreferrer"><%= company.roleURL || 'N/A' %></a></span>
+            </p>
+            <% } else { %>
+            <p class="fw-semibold">Job Post URL: <span class="fw-normal"><%= company.roleURL || 'N/A' %></span>
+            </p>
+            <% } %>
+
+            <p class="fw-semibold">Position Type: <span class="fw-normal"><%= company.position || 'N/A' %></span>
+            </p>
+            <p class="fw-semibold">Job Post Source: <span class="fw-normal"><%= company.source || 'N/A' %></span>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Application Modal -->
-  <div class="modal fade" id="applicationModal<%= index %>" tabindex="-1"
-    aria-labelledby="applicationModalLabel<%= index %>" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="applicationModalLabel<%= index %>">
-            Application Status
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Point of Contact Modal -->
+    <div class="modal fade" id="contactModal<%= index %>" tabindex="-1" aria-labelledby="contactModalLabel<%= index %>"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="contactModalLabel<%= index %>">
+              Point of Contact
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="fw-semibold">Name: <span class="fw-normal"><%= company.pointOfContact.name || 'N/A' %></span></p>
+            <p class="fw-semibold">Position: <span
+                class="fw-normal"><%= company.pointOfContact.position || 'N/A' %></span></p>
+            <p class="fw-semibold">Email: <span class="fw-normal"><%= company.pointOfContact.email || 'N/A' %></span>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
         </div>
-        <div class="modal-body">
-          <p class="fw-semibold">Applied: <span class="fw-normal">
-              <%= company.application.applied ? 'Yes' : 'No' %></span></p>
-          <p class="fw-semibold">Apply Date: <span class="fw-normal">
-              <%= company.application.applyDate ?
+      </div>
+    </div>
+
+    <!-- Application Modal -->
+    <div class="modal fade" id="applicationModal<%= index %>" tabindex="-1"
+      aria-labelledby="applicationModalLabel<%= index %>" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="applicationModalLabel<%= index %>">
+              Application Status
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="fw-semibold">Applied: <span class="fw-normal">
+                <%= company.application.applied ? 'Yes' : 'No' %></span></p>
+            <p class="fw-semibold">Apply Date: <span class="fw-normal">
+                <%= company.application.applyDate ?
             company.application.applyDate.toDateString() : 'N/A' %></span>
-          </p>
-          <p class="fw-semibold">
-            Coffee Chat: <span class="fw-normal"><%= company.application.coffeeChat ? 'Yes' : 'No' %></span>
-          </p>
-          <p class="fw-semibold">Coffee Chat Date: <span class="fw-normal">
-              <%= company.application.coffeeChatDate ?
+            </p>
+            <p class="fw-semibold">
+              Coffee Chat: <span class="fw-normal"><%= company.application.coffeeChat ? 'Yes' : 'No' %></span>
+            </p>
+            <p class="fw-semibold">Coffee Chat Date: <span class="fw-normal">
+                <%= company.application.coffeeChatDate ?
             company.application.coffeeChatDate.toDateString() : 'N/A' %></span>
-          </p>
-          <p class="fw-semibold">Said Thanks: <span class="fw-normal">
-              <%= company.application.saidThanks ? 'Yes' : 'No' %></span>
-          </p>
-          <p class="fw-semibold">Interview Date: <span class="fw-normal">
-              <%= company.application.interviewDate ?
+            </p>
+            <p class="fw-semibold">Said Thanks: <span class="fw-normal">
+                <%= company.application.saidThanks ? 'Yes' : 'No' %></span>
+            </p>
+            <p class="fw-semibold">Interview Date: <span class="fw-normal">
+                <%= company.application.interviewDate ?
             company.application.interviewDate.toDateString() : 'N/A' %></span>
-          </p>
-          <p class="fw-semibold">Follow Up: <span class="fw-normal">
-              <%= company.application.followUp ?
+            </p>
+            <p class="fw-semibold">Follow Up: <span class="fw-normal">
+                <%= company.application.followUp ?
             company.application.followUp.toDateString() : 'N/A' %></span>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Comments Modal -->
-  <div class="modal fade" id="commentsModal<%= index %>" tabindex="-1" aria-labelledby="commentsModalLabel<%= index %>"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="commentsModalLabel<%= index %>">
-            Comments
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p><%= company.comments %></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <% }) %>
+    <!-- Comments Modal -->
+    <div class="modal fade" id="commentsModal<%= index %>" tabindex="-1"
+      aria-labelledby="commentsModalLabel<%= index %>" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="commentsModalLabel<%= index %>">
+              Comments
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><%= company.comments %></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% }) %>
+  </div>
 </div>
