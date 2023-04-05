@@ -26,12 +26,25 @@
             data-bs-target="#contactModal<%= index %>"><%= company.pointOfContact.name %></a>
         </p>
 
-        <!-- Application Status (Trigger) -->
-        <p>
-          Application Status: <% if (company.application.applied) { %>
-          <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal"
+        <!-- Application Status Section -->
+        <div class="pb-2">
+          <p class="mb-1 fw-semibold">
+            Application Status:
+          </p>
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button"
+              class="btn btn-sm btn-outline-<%= company.application.applied ? 'success' : 'danger' %>">Applied</button>
+            <button type="button"
+              class="btn btn-sm btn-outline-<%= company.application.coffeeChat ? 'success' : 'danger' %>">Coffee
+              Chat</button>
+            <button type="button"
+              class="btn btn-sm btn-outline-<%= company.application.saidThanks ? 'success' : 'danger' %>">Thank
+              You Note</button>
+          </div>
+          <!-- Application Status (Trigger) -->
+          <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
             data-bs-target="#applicationModal<%= index %>">
-            Applied
+            View Dates
           </button>
           <% } else { %>
           <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
@@ -51,11 +64,13 @@
       </div>
       <div class="card-footer">
         <div class="d-flex  flex-row-reverse">
-          <a href="/companies/edit/<%= company._id %>" class="card-link">Edit</a>
+          <a href="/companies/edit/<%= company._id %>" class="btn btn-outline-primary btn-sm">Edit Company</a>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Modals related code starts here -->
 
   <!-- Point of Contact Modal -->
   <div class="modal fade" id="contactModal<%= index %>" tabindex="-1" aria-labelledby="contactModalLabel<%= index %>"
