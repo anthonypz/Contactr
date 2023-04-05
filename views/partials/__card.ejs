@@ -94,12 +94,28 @@
           <p class="fw-semibold">Company: <span class="fw-normal"><%= company.companyName || 'N/A' %></span></p>
           <p class="fw-semibold">Date Added: <span
               class="fw-normal"><%= company.dateAdded?.toDateString() || 'N/A' %></span></p>
+          <!-- validate URL before displaying link -->
+          <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.url)) { %>
+          <p class="fw-semibold">Company Website: <span class="fw-normal"><a href="<%= company.url %>" target="_blank"
+                rel="noopener noreferrer"><%= company.url || 'N/A' %></a></span>
+          </p>
+          <% } else { %>
           <p class="fw-semibold">Company Website: <span class="fw-normal"><%= company.url || 'N/A' %></span>
           </p>
+          <% } %>
+
           <p class="fw-semibold">Job Title: <span class="fw-normal"><%= company.role || 'N/A' %></span>
           </p>
+
+          <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.url)) { %>
+          <p class="fw-semibold">Job Post URL: <span class="fw-normal"><a href="<%= company.roleURL %>" target="_blank"
+                rel="noopener noreferrer"><%= company.roleURL || 'N/A' %></a></span>
+          </p>
+          <% } else { %>
           <p class="fw-semibold">Job Post URL: <span class="fw-normal"><%= company.roleURL || 'N/A' %></span>
           </p>
+          <% } %>
+
           <p class="fw-semibold">Position Type: <span class="fw-normal"><%= company.position || 'N/A' %></span>
           </p>
           <p class="fw-semibold">Job Post Source: <span class="fw-normal"><%= company.source || 'N/A' %></span>
