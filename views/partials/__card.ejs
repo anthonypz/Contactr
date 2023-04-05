@@ -51,21 +51,21 @@
             data-bs-target="#applicationModal<%= index %>">
             View Dates
           </button>
-          <% } else { %>
-          <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-            data-bs-target="#applicationModal<%= index %>">
-            Not Applied
-          </button>
-          <% } %>
-        </p>
-        <!-- Comments (Trigger) -->
-        <p>
-          Comments:
-          <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+        </div>
+        <!-- Comments Section -->
+        <div class="">
+          <p class="mb-1 fw-semibold">
+            Comments:
+          </p>
+          <p class="mb-1 text-truncate">
+            <%= company.comments || "N/A" %>
+          </p>
+          <!-- Comments (Trigger) -->
+          <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
             data-bs-target="#commentsModal<%= index %>">
             View Comments
           </button>
-        </p>
+        </div>
       </div>
       <div class="card-footer">
         <div class="d-flex  flex-row-reverse">
@@ -89,9 +89,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Name: <%= company.pointOfContact.name %></p>
-          <p>Position: <%= company.pointOfContact.position %></p>
-          <p>Email: <%= company.pointOfContact.email %></p>
+          <p class="fw-semibold">Name: <span class="fw-normal"><%= company.pointOfContact.name || 'N/A' %></span></p>
+          <p class="fw-semibold">Position: <span
+              class="fw-normal"><%= company.pointOfContact.position || 'N/A' %></span></p>
+          <p class="fw-semibold">Email: <span class="fw-normal"><%= company.pointOfContact.email || 'N/A' %></span></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -114,28 +115,29 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Applied: <%= company.application.applied ? 'Yes' : 'No' %></p>
-          <p>
-            Apply Date: <%= company.application.applyDate ?
-            company.application.applyDate.toDateString() : '' %>
+          <p class="fw-semibold">Applied: <span class="fw-normal">
+              <%= company.application.applied ? 'Yes' : 'No' %></span></p>
+          <p class="fw-semibold">Apply Date: <span class="fw-normal">
+              <%= company.application.applyDate ?
+            company.application.applyDate.toDateString() : 'N/A' %></span>
           </p>
-          <p>
-            Coffee Chat: <%= company.application.coffeeChat ? 'Yes' : 'No' %>
+          <p class="fw-semibold">
+            Coffee Chat: <span class="fw-normal"><%= company.application.coffeeChat ? 'Yes' : 'No' %></span>
           </p>
-          <p>
-            Coffee Chat Date: <%= company.application.coffeeChatDate ?
-            company.application.coffeeChatDate.toDateString() : '' %>
+          <p class="fw-semibold">Coffee Chat Date: <span class="fw-normal">
+              <%= company.application.coffeeChatDate ?
+            company.application.coffeeChatDate.toDateString() : 'N/A' %></span>
           </p>
-          <p>
-            Said Thanks: <%= company.application.saidThanks ? 'Yes' : 'No' %>
+          <p class="fw-semibold">Said Thanks: <span class="fw-normal">
+              <%= company.application.saidThanks ? 'Yes' : 'No' %></span>
           </p>
-          <p>
-            Interview Date: <%= company.application.interviewDate ?
-            company.application.interviewDate.toDateString() : '' %>
+          <p class="fw-semibold">Interview Date: <span class="fw-normal">
+              <%= company.application.interviewDate ?
+            company.application.interviewDate.toDateString() : 'N/A' %></span>
           </p>
-          <p>
-            Follow Up: <%= company.application.followUp ?
-            company.application.followUp.toDateString() : '' %>
+          <p class="fw-semibold">Follow Up: <span class="fw-normal">
+              <%= company.application.followUp ?
+            company.application.followUp.toDateString() : 'N/A' %></span>
           </p>
         </div>
         <div class="modal-footer">
