@@ -15,10 +15,20 @@
       </div>
       <!-- Card Body starts here -->
       <div class="card-body">
-        <!-- Company/Job Info (Trigger) -->
+        <!-- Company Info Section -->
         <div class="text-center pb-2">
-          <a class="card-title" href="<%= company.rollURL %>" target="_blank"><%= company.role %></a>
+          <p class="mb-1"><%= company.dateAdded?.toDateString() %></p>
+
+          <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.roleURL) && company.role) { %>
+          <a class="card-title" href="<%= company.roleURL %>" target="_blank"
+            rel="noopener noreferrer"><%= company.role %></a>
+          <% } else { %>
+          <p class="card-title"><%= company.role || '' %></p>
+          <% } %>
+
+
           <p class="text-muted"><%= company.position %></p>
+          <!-- Company/Job Info (Trigger) -->
           <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
             data-bs-target="#companyModal<%= index %>">View Company Info</button>
         </div>
@@ -107,7 +117,7 @@
           <p class="fw-semibold">Job Title: <span class="fw-normal"><%= company.role || 'N/A' %></span>
           </p>
 
-          <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.url)) { %>
+          <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.roleURL)) { %>
           <p class="fw-semibold">Job Post URL: <span class="fw-normal"><a href="<%= company.roleURL %>" target="_blank"
                 rel="noopener noreferrer"><%= company.roleURL || 'N/A' %></a></span>
           </p>
