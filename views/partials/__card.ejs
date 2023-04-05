@@ -6,25 +6,30 @@
       <div class="card-header">
         <!-- Make company name a link if a URL is provided -->
         <% if (/^(ftp|http|https):\/\/[^ "]+$/.test(company.url)) { %>
-        <a class="link-secondary" href="<%= company.url %>" target="_blank" rel="noopener noreferrer">
-          <h1 class="h2 text-center"><%= company.companyName %></h1>
+        <a class="link-dark" href="<%= company.url %>" target="_blank" rel="noopener noreferrer">
+          <h1 class="h4 text-center m-0"><%= company.companyName %></h1>
         </a>
         <% } else { %>
-        <h1 class="h2 text-center"><%= company.companyName %></h1>
+        <h1 class="h4 text-center m-0"><%= company.companyName %></h1>
         <% } %>
       </div>
+      <!-- Card Body starts here -->
       <div class="card-body">
+        <!-- Company/Job Info (Trigger) -->
         <div class="text-center m-2">
           <a class="card-title" href="<%= company.rollURL %>" target="_blank"><%= company.role %></a>
           <p class="text-muted"><%= company.position %></p>
         </div>
 
         <!-- Point of Contact Name (Trigger) -->
-        <p>
-          Contact:
-          <a class="card-link" data-bs-toggle="modal"
-            data-bs-target="#contactModal<%= index %>"><%= company.pointOfContact.name %></a>
-        </p>
+        <div class="pb-2">
+          <p class="mb-1 fw-semibold">
+            Point of Contact:
+          </p>
+          <p class="mb-1"><%= company.pointOfContact.name || 'N/A' %></p>
+          <button class="btn btn-sm btn-outline-secondary d-block mt-2" data-bs-toggle="modal"
+            data-bs-target="#contactModal<%= index %>">View Contact Info</button>
+        </div>
 
         <!-- Application Status Section -->
         <div class="pb-2">
