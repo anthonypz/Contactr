@@ -1,6 +1,6 @@
 // Company.js
 // Test again
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
 const CompanySchema = new mongoose.Schema({
   companyName: {
@@ -9,7 +9,7 @@ const CompanySchema = new mongoose.Schema({
   },
   dateAdded: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   url: String,
   role: String,
@@ -35,8 +35,8 @@ const CompanySchema = new mongoose.Schema({
   comments: String,
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
 })
 
-module.exports = mongoose.model('Company', CompanySchema)
+module.exports = mongoose.model("Company", CompanySchema)
