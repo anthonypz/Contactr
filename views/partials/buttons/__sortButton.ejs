@@ -1,0 +1,16 @@
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="sortButton"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <% const sortLabel = sort === 'asc' ? 'Alphabet A-Z' : sort === 'desc' ?
+    'Alphabet Z-A' : 'Sort' %> <%= sortLabel %>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="sortButton">
+    <li><a class="dropdown-item" href="?sort=asc">Alphabet A-Z</a></li>
+    <li><a class="dropdown-item" href="?sort=desc">Alphabet Z-A</a></li>
+  </ul>
+</div>

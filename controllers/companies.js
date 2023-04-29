@@ -48,12 +48,30 @@ exports.createCompany = async (req, res) => {
 
 // @desc    Show all companies
 // @route   GET /companies
-exports.showCompanies = async (req, res) => {
+// exports.showCompanies = async (req, res) => {
+//   try {
+//     const companies = await Company.find({ userId: req.user.id }).lean()
+//     // console.log(companies)
+//     res.render("companies.ejs", {
+//       companies,
+//     })
+//   } catch (err) {
+//     console.error(err)
+//     res.render("error/500")
+//   }
+// }
+
+// @desc    Show sorted companies
+// @route   GET /companies
+exports.showSortedCompanies = async (req, res) => {
   try {
-    const companies = await Company.find({ userId: req.user.id }).lean()
+    const sort = req.query.sort;
+    const sortDirection = sort === "asc" ? 1 : sort === "desc" ? -1 : 1;
+    const companies = await Company.find({ userId: req.user.id }).sort({ companyName: sortDirection }).lean()
     // console.log(companies)
     res.render("companies.ejs", {
       companies,
+      sort
     })
   } catch (err) {
     console.error(err)

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/__head') %>
+  </head>
+
+  <body class="">
+    <!-- Header / Navbar -->
+    <header class="navbar-space"><%- include('partials/__header') %></header>
+
+    <div
+      class="fb-box-shadow rounded-corners p-2 p-sm-4 text-center text-md-start"
+    >
+      <h1>Add Job</h1>
+      <form action="/job-listings" method="POST" class="mt-4">
+        <!-- Job Title -->
+        <div class="form-group">
+          <label for="jobTitle">Job Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="jobTitle"
+            name="jobTitle"
+            required
+          />
+        </div>
+
+        <!-- Listing URL -->
+        <div class="form-group">
+          <label for="listingURL">Listing URL</label>
+          <input
+            type="text"
+            class="form-control"
+            id="listingURL"
+            name="listingURL"
+          />
+        </div>
+
+        <!-- Job Description -->
+        <div class="form-group">
+          <label for="jobDescription">Job Description</label>
+          <textarea
+            class="form-control"
+            id="jobDescription"
+            name="jobDescription"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <!-- Company -->
+        <div class="form-group">
+          <label for="company">Company</label>
+          <select
+            class="form-control"
+            id="company"
+            name="company"
+            onchange="showNewCompanyFields(this.value)"
+          >
+            <option value="">Select company</option>
+            <% companies.forEach(function(company) { %>
+            <option value="<%= company._id %>">
+              <%= company.companyName %>
+            </option>
+            <% }) %>
+            <option value="newCompany">Add company</option>
+          </select>
+        </div>
+
+        <!-- New Company Fields (Initially hidden) -->
+        <div id="newCompanyFields" style="display: none">
+          <div class="form-group">
+            <label for="companyName">Company Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="companyName"
+              name="newCompany[companyName]"
+            />
+          </div>
+          <div class="form-group">
+            <label for="url">Company Website</label>
+            <input
+              type="text"
+              class="form-control"
+              id="url"
+              name="newCompany[url]"
+            />
+          </div>
+          <!-- Additional fields for the new company (e.g., location, industry, etc.) can be added here -->
+        </div>
+
+        <!-- Contact -->
+        <div class="form-group">
+          <label for="source">Contact</label>
+          <select
+            class="form-control"
+            id="source"
+            name="source"
+            onchange="showNewContactFields(this.value)"
+          >
+            <option value="">Select contact</option>
+            <% contacts.forEach(function(contact) { %>
+            <option value="<%= contact._id %>">
+              <%= contact.contactName %>
+            </option>
+            <% }) %>
+            <option value="new">Create new contact</option>
+          </select>
+        </div>
+
+        <!-- New Contact Fields (Initially hidden) -->
+        <div id="newContactFields" style="display: none">
+          <div class="form-group">
+            <label for="contactName">Contact Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="contactName"
+              name="newContact[contactName]"
+            />
+          </div>
+          <!-- Additional fields for the new contact (e.g., company, position, email, etc.) can be added here -->
+        </div>
+
+        <!-- Application -->
+        <div class="form-group">
+          <label>Application</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="applied"
+              name="application[applied]"
+            />
+            <label class="form-check-label" for="applied">Applied</label>
+          </div>
+          <!-- Additional application fields (e.g., applyDate, coffeeChat, coffeeChatDate, etc.) can be added here -->
+        </div>
+
+        <!-- Comments -->
+        <div class="form-group">
+          <label for="comments">Comments</label>
+          <textarea
+            class="form-control"
+            id="comments"
+            name="comments"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <hr />
+
+    <!-- Footer -->
+    <%- include('partials/__footer') %>
+
+    <!-- <script src="js/main.js"></script> -->
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Script to show/hide new company fields -->
+    <script>
+      function showNewCompanyFields(value) {
+        const newCompanyFields = document.getElementById('newCompanyFields');
+        if (value === 'newCompany') {
+          newCompanyFields.style.display = 'block';
+        } else {
+          newCompanyFields.style.display = 'none';
+        }
+      }
+    </script>
+    <!-- Script to show/hide new contact fields -->
+  <script>
+    function showNewContactFields(value) {
+      const newContactFields = document.getElementById('newContactFields');
+      if (value === 'new') {
+        newContactFields.style.display = 'block';
+      } else {
+        newContactFields.style.display = 'none';
+      }
+    }
+  </script>
+  </body>
+</html>

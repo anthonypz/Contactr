@@ -11,9 +11,9 @@ router.get("/add", ensureAuth, companyController.showAddPage);
 // @route   POST /companies
 router.post("/addCompany", ensureAuth, companyController.createCompany);
 
-// @desc    Show all companies
+// @desc    Show sorted companies
 // @route   GET /companies
-router.get("/", ensureAuth, companyController.showCompanies);
+router.get("/", ensureAuth, companyController.showSortedCompanies);
 
 // @desc    Show edit page
 // @route   GET /companies/edit/:id

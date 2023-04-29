@@ -11,31 +11,29 @@
   <body class="d-flex flex-column h-100">
     <div class="container-fluid">
       <div class="row">
-        <div class="col col-2">
-          <%- include('partials/__sidebar') %>
-        </div>
+        <div class="col col-2"><%- include('partials/__sidebar') %></div>
 
         <div class="col col-10">
           <div class="row">
-            <div class="col col-12">
+            <!-- <div class="col col-12">
               <h2 class="text-center m-4">Companies</h2>
+            </div> -->
+            <div class="col col-8">
+              <%- include('partials/buttons/__sortButton') %>
+            </div>
+            <div class="col col-4">
+              <%- include('partials/buttons/__addCompanyButton') %>
             </div>
           </div>
 
           <!-- list of companies in card format -->
           <div><%- include('partials/__card') %></div>
-          <div class="d-flex justify-content-center m-4">
-            <a class="btn btn-primary" href="/companies/add" role="button"
-              >Add Company</a
-            >
-          </div>
-          <hr />
         </div>
+        <hr />
       </div>
     </div>
     <!-- footer -->
     <footer><%- include('partials/__footer') %></footer>
-
 
     <script src="js/main.js"></script>
     <!-- JavaScript Bundle with Popper -->

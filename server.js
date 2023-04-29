@@ -9,8 +9,9 @@ const logger = require("morgan");
 const methodOverride = require("method-override");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
-const todoRoutes = require("./routes/todos");
+// const taskRoutes = require("./routes/tasks");
 const companyRoutes = require("./routes/companies");
+const jobRoutes = require("./routes/jobs");
 const authRoutes = require("./routes/auth");
 const sendfeedbackRoutes = require("./routes/sendfeedback");
 
@@ -57,6 +58,8 @@ app.use(flash());
 app.use("/", mainRoutes);
 // app.use("/todos", todoRoutes);
 app.use("/companies", companyRoutes);
+// app.use("/tasks", taskRoutes);
+app.use("/jobs", jobRoutes);
 app.use("/auth", authRoutes);
 app.use("/sendfeedback", sendfeedbackRoutes);
 

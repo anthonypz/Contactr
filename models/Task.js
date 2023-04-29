@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const CompanySchema = new mongoose.Schema({
+const TaskSchema = new mongoose.Schema({
   dateAdded: {
     type: Date,
     default: Date.now,
@@ -9,21 +9,19 @@ const CompanySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  contactId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Contact',
-  },
-  jobIds: [{
+  jobId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'JobListing',
-  }],
-  companyName: {
+  },
+  taskName: {
     type: String,
     required: true,
   },
-  url: String,
-  companyDescription: String,
+  taskDescription: String,
+  dueDate: Date,
+  completed: Boolean,
   comments: String,
+
 })
 
-module.exports = mongoose.model('Company', CompanySchema)
+module.exports = mongoose.model('Task', TaskSchema)
