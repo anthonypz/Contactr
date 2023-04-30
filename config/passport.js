@@ -1,5 +1,5 @@
 // const mongoose = require("mongoose");
-const User = require("../models/User");
+const User = require("../models/UserModel");
 const passport = require("passport");
 const refresh = require("passport-oauth2-refresh");
 const { Strategy: LocalStrategy } = require("passport-local");

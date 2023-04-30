@@ -25,19 +25,19 @@ const JobSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    listingURL: String,
+    jobURL: String,
     jobDescription: String,
-    source: String,
-    application: {
-        applied: Boolean,
-        applyDate: Date,
-        coffeeChat: Boolean,
-        coffeeChatDate: Date,
-        saidThanks: Boolean,
-        interviewDate: Date,
-        followUpDate: Date,
+    jobLocation: String,
+    jobStatus: {
+        type: String,
+        enum: ("Open", "Closed", "Cancelled"),
+        default: "Open",
     },
-    comments: String,
+    jobNotes: {
+        type: [String],
+        default: undefined,
+    },
+    
 })
 
 module.exports = mongoose.model('Job', JobSchema)

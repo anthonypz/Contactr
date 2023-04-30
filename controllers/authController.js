@@ -1,10 +1,10 @@
 const passport = require("passport");
 const validator = require("validator");
-const User = require("../models/User");
+const User = require("../models/UserModel");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/companies");
+    return res.redirect("/company");
   }
   res.render("login", {
     title: "Login",
@@ -39,7 +39,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/companies");
+      res.redirect(req.session.returnTo || "/company");
     });
   })(req, res, next);
 };
@@ -58,7 +58,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/companies");
+    return res.redirect("/company");
   }
   res.render("signup", {
     title: "Create Account",
@@ -77,7 +77,7 @@ exports.getAuthGoogleCallback = () => {
     passport.authenticate("google", { failureRedirect: "/login" }),
     function (req, res) {
       // Successful authentication, redirect home.
-      res.redirect("/companies");
+      res.redirect("/company");
     }
   );
 };
@@ -127,7 +127,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/companies");
+          res.redirect("/company");
         });
       });
     }

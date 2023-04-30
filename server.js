@@ -10,9 +10,10 @@ const methodOverride = require("method-override");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 // const taskRoutes = require("./routes/tasks");
-const companyRoutes = require("./routes/companies");
-const jobRoutes = require("./routes/jobs");
-const authRoutes = require("./routes/auth");
+// const contactRoutes = require("./routes/contact");
+const companyRoutes = require("./routes/companyRoutes");
+const jobRoutes = require("./routes/jobRoutes");
+const authRoutes = require("./routes/authRoutes");
 const sendfeedbackRoutes = require("./routes/sendfeedback");
 
 require("dotenv").config({ path: "./config/.env" });
@@ -57,9 +58,9 @@ app.use(flash());
 
 app.use("/", mainRoutes);
 // app.use("/todos", todoRoutes);
-app.use("/companies", companyRoutes);
+app.use("/company", companyRoutes);
 // app.use("/tasks", taskRoutes);
-app.use("/jobs", jobRoutes);
+app.use("/job", jobRoutes);
 app.use("/auth", authRoutes);
 app.use("/sendfeedback", sendfeedbackRoutes);
 

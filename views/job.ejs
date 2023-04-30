@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/__head') %>
+  </head>
+
+  <!-- Header / Navbar -->
+  <header class="navbar-space"><%- include('partials/__header') %></header>
+
+  <body class="d-flex flex-column h-100">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col col-2"><%- include('partials/__sidebar') %></div>
+
+        <div class="col col-10">
+          <div class="row">
+            <div class="col col-12">
+              <h2 class="text-center m-4">Jobs</h2>
+            </div>
+            <div class="col col-8">
+              <%- include('partials/buttons/__sortButton') %>
+            </div>
+            <div class="col col-4">
+              <%- include('partials/buttons/__addJobButton') %>
+            </div>
+          </div>
+          <div class="col col-12">
+            <%- include('partials/buttons/__addJobButton') %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

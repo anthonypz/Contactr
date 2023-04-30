@@ -12,42 +12,8 @@
       class="fb-box-shadow rounded-corners p-2 p-sm-4 text-center text-md-start"
     >
       <h1>Add Job</h1>
-      <form action="/job-listings" method="POST" class="mt-4">
-        <!-- Job Title -->
-        <div class="form-group">
-          <label for="jobTitle">Job Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="jobTitle"
-            name="jobTitle"
-            required
-          />
-        </div>
-
-        <!-- Listing URL -->
-        <div class="form-group">
-          <label for="listingURL">Listing URL</label>
-          <input
-            type="text"
-            class="form-control"
-            id="listingURL"
-            name="listingURL"
-          />
-        </div>
-
-        <!-- Job Description -->
-        <div class="form-group">
-          <label for="jobDescription">Job Description</label>
-          <textarea
-            class="form-control"
-            id="jobDescription"
-            name="jobDescription"
-            rows="3"
-          ></textarea>
-        </div>
-
-        <!-- Company -->
+      <form action="/job" method="POST" class="mt-4">
+        <!-- Company Name -->
         <div class="form-group">
           <label for="company">Company</label>
           <select
@@ -89,13 +55,13 @@
           <!-- Additional fields for the new company (e.g., location, industry, etc.) can be added here -->
         </div>
 
-        <!-- Contact -->
+        <!-- Contact Name -->
         <div class="form-group">
-          <label for="source">Contact</label>
+          <label for="contact">Contact</label>
           <select
             class="form-control"
-            id="source"
-            name="source"
+            id="contact"
+            name="contact"
             onchange="showNewContactFields(this.value)"
           >
             <option value="">Select contact</option>
@@ -104,7 +70,7 @@
               <%= contact.contactName %>
             </option>
             <% }) %>
-            <option value="new">Create new contact</option>
+            <option value="newContact">Create new contact</option>
           </select>
         </div>
 
@@ -121,29 +87,77 @@
           </div>
           <!-- Additional fields for the new contact (e.g., company, position, email, etc.) can be added here -->
         </div>
+        <!-- Job Title -->
+        <div class="form-group">
+          <label for="jobTitle">Job Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="jobTitle"
+            name="jobTitle"
+            required
+          />
+        </div>
+
+        <!-- Job URL -->
+        <div class="form-group">
+          <label for="jobURL">Job URL</label>
+          <input type="text" class="form-control" id="jobURL" name="jobURL" />
+        </div>
+
+        <!-- Job Description -->
+        <div class="form-group">
+          <label for="jobDescription">Job Description</label>
+          <textarea
+            class="form-control"
+            id="jobDescription"
+            name="jobDescription"
+            rows="3"
+          ></textarea>
+        </div>
 
         <!-- Application -->
         <div class="form-group">
-          <label>Application</label>
+          <label>Job Location</label>
           <div class="form-check">
             <input
               class="form-check-input"
-              type="checkbox"
-              id="applied"
-              name="application[applied]"
+              type="radio"
+              name="jobLocation"
+              id="remote"
+              value="remote"
             />
-            <label class="form-check-label" for="applied">Applied</label>
+            <label class="form-check-label" for="remote"> Remote </label>
           </div>
-          <!-- Additional application fields (e.g., applyDate, coffeeChat, coffeeChatDate, etc.) can be added here -->
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="jobLocation"
+              id="hybrid"
+              value="hybrid"
+            />
+            <label class="form-check-label" for="hybrid"> Hybrid </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="jobLocation"
+              id="inPerson"
+              value="inPerson"
+            />
+            <label class="form-check-label" for="inPerson"> In Person </label>
+          </div>
         </div>
 
-        <!-- Comments -->
+        <!-- Notes  -->
         <div class="form-group">
-          <label for="comments">Comments</label>
+          <label for="notes">Notes</label>
           <textarea
             class="form-control"
-            id="comments"
-            name="comments"
+            id="notes"
+            name="notes"
             rows="3"
           ></textarea>
         </div>
@@ -168,24 +182,24 @@
     <!-- Script to show/hide new company fields -->
     <script>
       function showNewCompanyFields(value) {
-        const newCompanyFields = document.getElementById('newCompanyFields');
-        if (value === 'newCompany') {
-          newCompanyFields.style.display = 'block';
+        const newCompanyFields = document.getElementById("newCompanyFields");
+        if (value === "newCompany") {
+          newCompanyFields.style.display = "block";
         } else {
-          newCompanyFields.style.display = 'none';
+          newCompanyFields.style.display = "none";
         }
       }
     </script>
     <!-- Script to show/hide new contact fields -->
-  <script>
-    function showNewContactFields(value) {
-      const newContactFields = document.getElementById('newContactFields');
-      if (value === 'new') {
-        newContactFields.style.display = 'block';
-      } else {
-        newContactFields.style.display = 'none';
+    <script>
+      function showNewContactFields(value) {
+        const newContactFields = document.getElementById("newContactFields");
+        if (value === "newContact") {
+          newContactFields.style.display = "block";
+        } else {
+          newContactFields.style.display = "none";
+        }
       }
-    }
-  </script>
+    </script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-const Company = require("../models/Company")
+const Company = require("../models/CompanyModel")
 
 // @desc    Show add page
 // @route   GET /companies/addCompany
@@ -7,7 +7,7 @@ exports.showAddPage = (req, res) => {
 }
 
 // @desc    Process add form
-// @route   POST /companies
+// @route   POST /company
 exports.createCompany = async (req, res) => {
   console.log("request body:", req.body)
   try {
@@ -40,7 +40,7 @@ exports.createCompany = async (req, res) => {
     })
     console.log("Company Data has been added!")
     console.log(company)
-    res.redirect("/companies")
+    res.redirect("/company")
   } catch (err) {
     console.log(err)
   }
@@ -61,15 +61,15 @@ exports.createCompany = async (req, res) => {
 //   }
 // }
 
-// @desc    Show sorted companies
-// @route   GET /companies
+// @desc    Show sorted company
+// @route   GET /company
 exports.showSortedCompanies = async (req, res) => {
   try {
     const sort = req.query.sort;
     const sortDirection = sort === "asc" ? 1 : sort === "desc" ? -1 : 1;
     const companies = await Company.find({ userId: req.user.id }).sort({ companyName: sortDirection }).lean()
     // console.log(companies)
-    res.render("companies.ejs", {
+    res.render("company.ejs", {
       companies,
       sort
     })
@@ -90,7 +90,7 @@ exports.showEditPage = async (req, res) => {
       return res.render("error/404")
     }
     if (company.userId != req.user.id) {
-      res.redirect("/companies")
+      res.redirect("/company")
     } else {
       console.log(company)
       res.render("editCompany.ejs", {
@@ -113,7 +113,7 @@ exports.updateCompany = async (req, res) => {
       return res.render("error/404")
     }
     if (company.userId != req.user.id) {
-      res.redirect("/companies")
+      res.redirect("/company")
     } else {
       company = await Company.findOneAndUpdate(
         { _id: req.params.id },
@@ -123,7 +123,7 @@ exports.updateCompany = async (req, res) => {
           runValidators: true,
         }
       )
-      res.redirect("/companies")
+      res.redirect("/company")
     }
   } catch (err) {
     console.error(err)
@@ -137,7 +137,7 @@ exports.deleteCompany = async (req, res) => {
   try {
     await Company.remove({ _id: req.params.id })
     console.log("Company has been deleted!")
-    res.redirect("/companies")
+    res.redirect("/company")
   } catch (err) {
     console.error(err)
     return res.render("error/500")

@@ -8,199 +8,26 @@
       </div>
       <div class="card-body">
         <div class="text-center m-2">
-          <a class="card-title" href="<%= company.rollURL %>" target="_blank"
-            ><%= company.role %></a
+          <a class="card-title" href="<%= company.url %>" target="_blank"
+            ><%= company.url %></a
           >
-          <p class="text-muted"><%= company.position %></p>
         </div>
-
-        <!-- Point of Contact Name (Trigger) -->
-        <p>
-          Contact:
-          <a
-            class="card-link"
-            data-bs-toggle="modal"
-            data-bs-target="#contactModal<%= index %>"
-            ><%= company.pointOfContact.name %></a
-          >
-        </p>
-
-        <!-- Application Status (Trigger) -->
-        <p>
-          Status: <% if (company.application.applied) { %>
-          <button
-            class="btn btn-sm btn-outline-success"
-            data-bs-toggle="modal"
-            data-bs-target="#applicationModal<%= index %>"
-          >
-            Applied
-          </button>
-          <% } else { %>
-          <button
-            class="btn btn-sm btn-outline-danger"
-            data-bs-toggle="modal"
-            data-bs-target="#applicationModal<%= index %>"
-          >
-            Not Applied
-          </button>
-          <% } %>
-        </p>
-        <!-- Comments (Trigger) -->
-        <p>
-          Comments:
-          <button
-            class="btn btn-sm btn-outline-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#commentsModal<%= index %>"
-          >
-            Open Comments
-          </button>
-        </p>
-      </div>
-      <div class="card-footer">
-        <div class="d-flex  flex-row-reverse">
-          <a href="/companies/edit/<%= company._id %>" class="card-link"
-            >Edit</a
-          >
+        <div class="text-center m-2">
+          <p class="card-text"><%= company.companyDescription %></p>
+        </div>
+        <div class="text-center m-2">
+          <p class="card-text"><%= company.comments %></p>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex flex-row-reverse">
+            <a href="/companies/edit/<%= company._id %>" class="card-link"
+              >Edit</a
+            >
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Point of Contact Modal -->
-  <div
-    class="modal fade"
-    id="contactModal<%= index %>"
-    tabindex="-1"
-    aria-labelledby="contactModalLabel<%= index %>"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel<%= index %>">
-            Point of Contact
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <p>Name: <%= company.pointOfContact.name %></p>
-          <p>Position: <%= company.pointOfContact.position %></p>
-          <p>Email: <%= company.pointOfContact.email %></p>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Application Modal -->
-  <div
-    class="modal fade"
-    id="applicationModal<%= index %>"
-    tabindex="-1"
-    aria-labelledby="applicationModalLabel<%= index %>"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="applicationModalLabel<%= index %>">
-            Application Status
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <p>Applied: <%= company.application.applied ? 'Yes' : 'No' %></p>
-          <p>
-            Apply Date: <%= company.application.applyDate ?
-            company.application.applyDate.toDateString() : '' %>
-          </p>
-          <p>
-            Coffee Chat: <%= company.application.coffeeChat ? 'Yes' : 'No' %>
-          </p>
-          <p>
-            Coffee Chat Date: <%= company.application.coffeeChatDate ?
-            company.application.coffeeChatDate.toDateString() : '' %>
-          </p>
-          <p>
-            Said Thanks: <%= company.application.saidThanks ? 'Yes' : 'No' %>
-          </p>
-          <p>
-            Interview Date: <%= company.application.interviewDate ?
-            company.application.interviewDate.toDateString() : '' %>
-          </p>
-          <p>
-            Follow Up: <%= company.application.followUp ?
-            company.application.followUp.toDateString() : '' %>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Comments Modal -->
-  <div
-    class="modal fade"
-    id="commentsModal<%= index %>"
-    tabindex="-1"
-    aria-labelledby="commentsModalLabel<%= index %>"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="commentsModalLabel<%= index %>">
-            Comments
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <p><%= company.comments %></p>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <% }) %>
 </div>
+
