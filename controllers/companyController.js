@@ -1,7 +1,7 @@
 const Company = require("../models/CompanyModel")
 
 // @desc    Show add page
-// @route   GET /companies/addCompany
+// @route   GET /company/addCompany
 exports.showAddPage = (req, res) => {
   res.render("addCompany.ejs")
 }
@@ -11,48 +11,43 @@ exports.showAddPage = (req, res) => {
 exports.createCompany = async (req, res) => {
   console.log("request body:", req.body)
   try {
+    // extract the user id from the request
     const uniqID = await req.user.id
+    // extract the data from the request body
+    const { contactId, jobId, companyName, url, companyDescription, comments } = req.body
+    // create a new company object
     const company = await Company.create({
       userId: uniqID,
-      companyName: req.body.companyName,
-      // Added a default date for current date
-      dateAdded: req.body.dateAdded || new Date(),
-      url: req.body.url,
-      role: req.body.role,
-      roleURL: req.body.roleURL,
-      position: req.body.position,
-      source: req.body.source,
-      pointOfContact: {
-        name: req.body.pocName,
-        position: req.body.pocPosition,
-        email: req.body.pocEmail,
-      },
-      application: {
-        applied: req.body?.applied === "yes",
-        applyDate: req.body.applyDate,
-        coffeeChat: req.body?.coffeeChat === "yes",
-        coffeeChatDate: req.body.coffeeChatDate,
-        saidThanks: req.body?.saidThanks === "yes",
-        interviewDate: req.body.interviewDate,
-        followUpDate: req.body.followUpDate,
-      },
-      comments: req.body.comments,
-    })
-    console.log("Company Data has been added!")
-    console.log(company)
-    res.redirect("/company")
+      contactId,
+      jobId,
+      companyName,
+      url,
+      companyDescription,
+      comments
+    });
+    // save the company object to the database
+    await company.save();
+    // send a success message and update the page
+    res.status(201).json({
+      success: true,
+      message: "Company created",
+      data: company,
+    });
   } catch (err) {
-    console.log(err)
+    res.status(500).json({
+      success: false,
+      message: "Server Error while creating company",
+      error: err.message,
+    });
   }
-}
+};
 
 // @desc    Show all companies
 // @route   GET /companies
-// exports.showCompanies = async (req, res) => {
+// exports.showAllCompanies = async (req, res) => {
 //   try {
 //     const companies = await Company.find({ userId: req.user.id }).lean()
-//     // console.log(companies)
-//     res.render("companies.ejs", {
+//     res.render("company.ejs", {
 //       companies,
 //     })
 //   } catch (err) {
@@ -65,17 +60,30 @@ exports.createCompany = async (req, res) => {
 // @route   GET /company
 exports.showSortedCompanies = async (req, res) => {
   try {
+    // extract the sort direction from the request query
     const sort = req.query.sort;
+    // set the sort direction
     const sortDirection = sort === "asc" ? 1 : sort === "desc" ? -1 : 1;
-    const companies = await Company.find({ userId: req.user.id }).sort({ companyName: sortDirection }).lean()
+    //  extract the user id from the request
+    const uniqID = await req.user.id
+    // retrieve the companies from the database along with the associated contactIds and jobIds
+    const companies = await Company.find({ userId: uniqID })
+      .populate("contactId")
+      .populate("jobId")
+      .sort({ companyName: sortDirection })
+      .lean()
+
     // console.log(companies)
     res.render("company.ejs", {
       companies,
       sort
     })
   } catch (err) {
-    console.error(err)
-    res.render("error/500")
+    res.status(500).json({
+      success: false,
+      message: "Server Error while retrieving companies",
+      error: err.message,
+    });
   }
 }
 
@@ -104,7 +112,7 @@ exports.showEditPage = async (req, res) => {
 }
 
 // @desc    Update company
-// @route   PUT /companies/:id
+// @route   PUT /company/:id
 exports.updateCompany = async (req, res) => {
   try {
     let company = await Company.findById(req.params.id).lean()
@@ -132,7 +140,7 @@ exports.updateCompany = async (req, res) => {
 }
 
 // @desc    Delete company
-// @route   DELETE /companies/:id
+// @route   DELETE /company/:id
 exports.deleteCompany = async (req, res) => {
   try {
     await Company.remove({ _id: req.params.id })

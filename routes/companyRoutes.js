@@ -4,27 +4,27 @@ const companyController = require("../controllers/companyController");
 const { ensureAuth } = require("../middleware/auth");
 
 // @desc    Show add page
-// @route   GET /companies/add
+// @route   GET /company/add
 router.get("/add", ensureAuth, companyController.showAddPage);
 
 // @desc    Process add form
-// @route   POST /companies
+// @route   POST /company
 router.post("/addCompany", ensureAuth, companyController.createCompany);
 
 // @desc    Show sorted companies
-// @route   GET /companies
+// @route   GET /company
 router.get("/", ensureAuth, companyController.showSortedCompanies);
 
 // @desc    Show edit page
-// @route   GET /companies/edit/:id
+// @route   GET /company/edit/:id
 router.get("/edit/:id", ensureAuth, companyController.showEditPage);
 
 // @desc    Update company
-// @route   PUT /companies/:id
+// @route   PUT /company/:id
 router.put("/:id", ensureAuth, companyController.updateCompany);
 
 // @desc    Delete company
-// @route   DELETE /companies/:id
+// @route   DELETE /company/:id
 router.delete("/:id", ensureAuth, companyController.deleteCompany);
 
 

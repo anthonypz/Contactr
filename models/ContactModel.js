@@ -17,7 +17,6 @@ const ContactSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    company: String,
     position: String,
     social_url: String,
     email: String,

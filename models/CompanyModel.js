@@ -9,11 +9,11 @@ const CompanySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  contactId: {
+  contactId: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Contact',
-  },
-  jobIds: [{
+  }],
+  jobId: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'JobListing',
   }],
